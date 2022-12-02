@@ -42,11 +42,11 @@ public class PasteBinHomePage {
         pasteTextArea.sendKeys(code);
 
         pasteSyntaxHighlightingDropdown.click();
-        pasteSyntaxHighlightingOption = driver.findElement(By.xpath("//li[text()='" + highlighting + "']"));
+        pasteSyntaxHighlightingOption = driver.findElement(By.xpath(String.format("//li[text()='%s']", highlighting)));
         pasteSyntaxHighlightingOption.click();
 
         pasteExpirationDropdown.click();
-        pasteExpirationOption = driver.findElement(By.xpath("//li[text()='" + expiration + "']"));
+        pasteExpirationOption = driver.findElement(By.xpath(String.format("//li[text()='%s']", expiration)));
         pasteExpirationOption.click();
 
         pasteNameTitleInput.sendKeys(name);

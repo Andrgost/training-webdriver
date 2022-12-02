@@ -10,15 +10,16 @@ import java.util.List;
 import java.util.Objects;
 
 public class CreatedPaste {
-    private WebDriver driver;
-    private String pageTitle;
+    private final WebDriver driver;
+    private final String pageTitle;
 
-    @FindBy(className = "info-top")
+    @FindBy(xpath = "//*[@class='info-top']/h1")
     private WebElement pasteTitle;
 
     @FindBy(xpath = "//*[text()='Bash']")
     private WebElement pasteHighlightingCode;
 
+    @FindBy(className = "li1")
     private List<WebElement> pasteCode;
 
     public CreatedPaste(WebDriver driver, String pageTitle) {
@@ -28,7 +29,6 @@ public class CreatedPaste {
     }
 
     public boolean isCreated() {
-        pasteTitle.findElement(By.xpath("//*[@class='info-top']/h1"));
         return Objects.equals(pasteTitle.getText(), pageTitle);
     }
 
@@ -43,7 +43,6 @@ public class CreatedPaste {
     public String getPasteCode() {
         StringBuilder result = new StringBuilder();
 
-        pasteCode = driver.findElements(By.className("li1"));
         pasteCode.forEach(item -> result.append(item.getText()));
 
         return result.toString();
