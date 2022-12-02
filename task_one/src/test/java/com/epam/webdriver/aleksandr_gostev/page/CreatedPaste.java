@@ -1,6 +1,5 @@
 package com.epam.webdriver.aleksandr_gostev.page;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,7 +11,7 @@ public class CreatedPaste {
     private final WebDriver driver;
     private final String pageTitle;
 
-    @FindBy(className = "info-top")
+    @FindBy(xpath = "//*[@class='info-top']/h1")
     private WebElement pasteTitle;
 
     public CreatedPaste(WebDriver driver, String pageTitle) {
@@ -22,7 +21,6 @@ public class CreatedPaste {
     }
 
     public boolean isCreated() {
-        pasteTitle.findElement(By.xpath("//*[@class='info-top']/h1"));
         return Objects.equals(pasteTitle.getText(), pageTitle);
     }
 }

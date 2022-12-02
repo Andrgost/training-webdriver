@@ -38,7 +38,7 @@ public class PasteBinHomePage {
         pasteTextArea.sendKeys(code);
 
         pasteExpirationDropdown.click();
-        pasteExpirationOption = driver.findElement(By.xpath("//li[text()='" + duration + "']"));
+        pasteExpirationOption = driver.findElement(By.xpath(String.format("//li[text()='%s']", duration)));
         pasteExpirationOption.click();
 
         pasteNameTitleInput.sendKeys(name);
