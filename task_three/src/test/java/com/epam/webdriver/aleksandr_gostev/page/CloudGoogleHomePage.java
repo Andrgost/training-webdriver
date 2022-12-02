@@ -59,6 +59,11 @@ public class GoogleCloudPricingCalculatorPage {
     @FindBy(xpath = "//button[@ng-click='listingCtrl.addComputeServer(ComputeEngineForm);']")
     private WebElement addToEstimateButton;
 
+    public GoogleCloudPricingCalculatorPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
     public WebElement getProvisioningModel() {
         /*
         provisioningModelSelect.click();
@@ -89,11 +94,6 @@ public class GoogleCloudPricingCalculatorPage {
         provisioningModelOption = driver.findElement(By.id("select_option_1305"));
         */
         return localSSDOption;
-    }
-
-    public GoogleCloudPricingCalculatorPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
     }
 
     public GoogleCloudPricingCalculatorPage clickComputeEngineTab() {

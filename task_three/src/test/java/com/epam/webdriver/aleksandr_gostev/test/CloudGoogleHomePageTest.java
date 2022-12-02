@@ -17,13 +17,12 @@ import java.time.Duration;
 
 public class CloudGoogleHomePageTest {
 
-    private WebDriver driver;
-
     private final String PROVISIONING_MODEL = "Spot";
     private final String INSTANCE_TYPE = "n1-standard-8";
     private final String DATACENTER_LOCATION = "Frankfurt";
     private final String LOCAL_SSD = "2x375 GiB";
     private final double TOTAL_PRICE = 2563.32D;
+    private WebDriver driver;
 
     @BeforeMethod(alwaysRun = true)
     public void browserSetup() {
@@ -48,79 +47,80 @@ public class CloudGoogleHomePageTest {
         Assert.assertTrue(provisioningModelValue.contains(PROVISIONING_MODEL), "Provisioning Model is not equal");
         //Assert.assertEquals("test", "ttt");
     }
-/*
-    @Test(description = "Verify Machine type (Instance type) field")
-    public void checkMachineType() throws InterruptedException {
 
-        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driver)
-                .openPage()
-                .searchForTerm()
-                .clickSearchResult();
+    /*
+        @Test(description = "Verify Machine type (Instance type) field")
+        public void checkMachineType() throws InterruptedException {
 
-        WebElement machineType = calculatorPage
-                .clickComputeEngineTab()
-                .fillInComputeEngineForm()
-                .getProvisioningModel();
+            GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driver)
+                    .openPage()
+                    .searchForTerm()
+                    .clickSearchResult();
 
-        String machineTypeValue = machineType.getText();
+            WebElement machineType = calculatorPage
+                    .clickComputeEngineTab()
+                    .fillInComputeEngineForm()
+                    .getProvisioningModel();
 
-        Assert.assertTrue(machineTypeValue.contains(INSTANCE_TYPE), "Machine type is not equal");
-    }
+            String machineTypeValue = machineType.getText();
 
-    @Test(description = "Verify Datacenter location (Region) field")
-    public void checkDatacenterLocation() throws InterruptedException {
+            Assert.assertTrue(machineTypeValue.contains(INSTANCE_TYPE), "Machine type is not equal");
+        }
 
-        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driver)
-                .openPage()
-                .searchForTerm()
-                .clickSearchResult();
+        @Test(description = "Verify Datacenter location (Region) field")
+        public void checkDatacenterLocation() throws InterruptedException {
 
-        WebElement datacenterLocation = calculatorPage
-                .clickComputeEngineTab()
-                .fillInComputeEngineForm()
-                .getProvisioningModel();
+            GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driver)
+                    .openPage()
+                    .searchForTerm()
+                    .clickSearchResult();
 
-        String datacenterLocationValue = datacenterLocation.getText();
+            WebElement datacenterLocation = calculatorPage
+                    .clickComputeEngineTab()
+                    .fillInComputeEngineForm()
+                    .getProvisioningModel();
 
-        Assert.assertTrue(datacenterLocationValue.contains(DATACENTER_LOCATION), "Datacenter location is not equal");
-    }
+            String datacenterLocationValue = datacenterLocation.getText();
 
-    @Test(description = "Verify Local SSD field")
-    public void checkLocalSSD() throws InterruptedException {
+            Assert.assertTrue(datacenterLocationValue.contains(DATACENTER_LOCATION), "Datacenter location is not equal");
+        }
 
-        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driver)
-                .openPage()
-                .searchForTerm()
-                .clickSearchResult();
+        @Test(description = "Verify Local SSD field")
+        public void checkLocalSSD() throws InterruptedException {
 
-        WebElement localSSD = calculatorPage
-                .clickComputeEngineTab()
-                .fillInComputeEngineForm()
-                .getProvisioningModel();
+            GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driver)
+                    .openPage()
+                    .searchForTerm()
+                    .clickSearchResult();
 
-        String localSSDValue = localSSD.getText();
+            WebElement localSSD = calculatorPage
+                    .clickComputeEngineTab()
+                    .fillInComputeEngineForm()
+                    .getProvisioningModel();
 
-        Assert.assertTrue(localSSDValue.contains(LOCAL_SSD), "Local SSD is not equal");
-    }
+            String localSSDValue = localSSD.getText();
 
-    @Test(description = "Verify Cost value")
-    public void checkCost() throws InterruptedException {
+            Assert.assertTrue(localSSDValue.contains(LOCAL_SSD), "Local SSD is not equal");
+        }
 
-        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driver)
-                .openPage()
-                .searchForTerm()
-                .clickSearchResult();
+        @Test(description = "Verify Cost value")
+        public void checkCost() throws InterruptedException {
 
-        WebElement totalPrice = calculatorPage
-                .clickComputeEngineTab()
-                .fillInComputeEngineForm()
-                .getProvisioningModel();
+            GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driver)
+                    .openPage()
+                    .searchForTerm()
+                    .clickSearchResult();
 
-        double totalPriceValue = 1;//totalPrice.getText();
+            WebElement totalPrice = calculatorPage
+                    .clickComputeEngineTab()
+                    .fillInComputeEngineForm()
+                    .getProvisioningModel();
 
-        Assert.assertTrue(totalPriceValue == TOTAL_PRICE, "Local SSD is not equal");
-    }
-*/
+            double totalPriceValue = 1;//totalPrice.getText();
+
+            Assert.assertTrue(totalPriceValue == TOTAL_PRICE, "Local SSD is not equal");
+        }
+    */
     @AfterMethod(alwaysRun = true)
     public void browserTearDown() {
         driver.quit();

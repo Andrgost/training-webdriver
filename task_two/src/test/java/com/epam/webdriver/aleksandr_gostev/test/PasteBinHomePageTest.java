@@ -20,7 +20,7 @@ public class PasteBinHomePageTest {
         driver = new FirefoxDriver();
     }
 
-    @Test (description = "Check tab title is equals to paste name / title", dataProvider = "PageFieldsValues", dataProviderClass = ParametersByDataProvider.class)
+    @Test(description = "Check tab title is equals to paste name / title", dataProvider = "PageFieldsValues", dataProviderClass = ParametersByDataProvider.class)
     public void checkPageTitle(String code, String highlighting, String expiration, String name) {
         createdPaste = new PasteBinHomePage(driver)
                 .openPage()
@@ -29,7 +29,7 @@ public class PasteBinHomePageTest {
         Assert.assertTrue(createdPaste.getTabTitle().contains(name), "Page title is not correct.");
     }
 
-    @Test (description = "Check highlighting code", dataProvider = "PageFieldsValues", dataProviderClass = ParametersByDataProvider.class)
+    @Test(description = "Check highlighting code", dataProvider = "PageFieldsValues", dataProviderClass = ParametersByDataProvider.class)
     public void checkHighlightingCode(String code, String highlighting, String expiration, String name) {
         createdPaste = new PasteBinHomePage(driver)
                 .openPage()
@@ -38,7 +38,7 @@ public class PasteBinHomePageTest {
         Assert.assertEquals(createdPaste.getHighlightingCode(), highlighting, "Highlighting code is not correct.");
     }
 
-    @Test (description = "Check highlighting code", dataProvider = "PageFieldsValues", dataProviderClass = ParametersByDataProvider.class)
+    @Test(description = "Check highlighting code", dataProvider = "PageFieldsValues", dataProviderClass = ParametersByDataProvider.class)
     public void checkCode(String code, String highlighting, String expiration, String name) {
         createdPaste = new PasteBinHomePage(driver)
                 .openPage()

@@ -29,7 +29,8 @@ public class GoogleCloudPricingCalculatorPage {
     private WebElement operatingSystemSoftwareSelect;
     private WebElement operatingSystemSoftwareOption;
 
-    @FindBy(css = "md-select[ng-model='listingCtrl.computeServer.class']")//"//md-select[@ng-model='listingCtrl.computeServer.class']")
+    @FindBy(css = "md-select[ng-model='listingCtrl.computeServer.class']")
+//"//md-select[@ng-model='listingCtrl.computeServer.class']")
     private WebElement provisioningModelSelect;
     private WebElement provisioningModelOption;
 
@@ -63,6 +64,11 @@ public class GoogleCloudPricingCalculatorPage {
     @FindBy(xpath = "//button[@ng-click='listingCtrl.addComputeServer(ComputeEngineForm);']")
     private WebElement addToEstimateButton;
 
+    public GoogleCloudPricingCalculatorPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
     public WebElement getProvisioningModel() {
         /*
         provisioningModelSelect.click();
@@ -93,11 +99,6 @@ public class GoogleCloudPricingCalculatorPage {
         provisioningModelOption = driver.findElement(By.id("select_option_1305"));
         */
         return localSSDOption;
-    }
-
-    public GoogleCloudPricingCalculatorPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
     }
 
     public GoogleCloudPricingCalculatorPage clickComputeEngineTab() {
