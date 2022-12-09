@@ -72,19 +72,25 @@ public class GoogleCloudPricingCalculatorPage {
         return this;
     }
 
-    public EstimatePage fillInComputeEngineForm(String provisioningModel,
+    public EstimatePage fillInComputeEngineForm(Integer numberOfInstances,
+                                                String whatAreTheseInstancesFor,
+                                                String operatingSystemSoftware,
+                                                String provisioningModel,
                                                 String machineType,
+                                                Boolean gpu,
+                                                String gpuType,
+                                                String numberOfGPU,
                                                 String localSSD,
                                                 String datacenterLocation) {
         //Instances input
-        numberOfInstancesInput.sendKeys("4");
+        numberOfInstancesInput.sendKeys(numberOfInstances.toString());
 
         //What Are These Instances For input
-        whatAreTheseInstancesForInput.sendKeys("");
+        whatAreTheseInstancesForInput.sendKeys(whatAreTheseInstancesFor);
 
         //Operating System / Software dropdown
         operatingSystemSoftwareSelect.click();
-        operatingSystemSoftwareOption = driver.findElement(By.xpath("//md-option[@value='free']/div[@class='md-text']"));
+        operatingSystemSoftwareOption = driver.findElement(By.xpath(String.format("//md-option[@value='%s']/div[@class='md-text']", operatingSystemSoftware)));
         operatingSystemSoftwareOption.click();
 
         //Provisioning model (VM Class) dropdown
@@ -98,16 +104,16 @@ public class GoogleCloudPricingCalculatorPage {
         machineTypeOption.click();
 
         //Add GPUs checkbox
-        GPUCheckbox.click();
+        if (gpu) GPUCheckbox.click();
 
         //GPU type dropdown
         GPUTypeSelect.click();
-        GPUTypeOption = driver.findElement(By.xpath("//md-option[@value='NVIDIA_TESLA_P100']"));
+        GPUTypeOption = driver.findElement(By.xpath(String.format("//md-option[@value='%s']", gpuType)));
         GPUTypeOption.click();
 
         //Number of GPUs dropdown
         numberOfGPUSelect.click();
-        numberOfGPUOption = driver.findElement(By.xpath("//md-option[contains(@ng-repeat,'gpuType') and @value='1']"));
+        numberOfGPUOption = driver.findElement(By.xpath(String.format("//md-option[contains(@ng-repeat,'gpuType') and @value='%s']", numberOfGPU)));
         numberOfGPUOption.click();
 
         //Local SSD dropdown
@@ -117,7 +123,7 @@ public class GoogleCloudPricingCalculatorPage {
 
         //Datacenter Location dropdown
         datacenterLocationSelect.click();
-        datacenterLocationOption = driver.findElement(By.xpath(String.format("//md-option[contains(@ng-repeat,'computeServer') and @value='%s']", datacenterLocation)));
+        datacenterLocationOption = driver.findElement(By.xpath(String.format("//md-option[contains(@ng-repeat,'computeServer') and @value='%s']/div", datacenterLocation)));
         datacenterLocationOption.click();
 
         //Committed usage - depends on Provisioning model = Regular

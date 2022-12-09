@@ -7,7 +7,7 @@ public class ParametersByDataProvider {
     @DataProvider(name = "PageFieldsValues")
     public static Object[][] getDataFromDataprovider() {
         return new Object[][] {
-                { "Spot", "CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-64", "3x375", "europe-west3"}
+                { 4, "", "free", "Spot", "CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-64", true, "NVIDIA_TESLA_P100", "1", "3x375", "europe-west3"}
         };
     }
 }

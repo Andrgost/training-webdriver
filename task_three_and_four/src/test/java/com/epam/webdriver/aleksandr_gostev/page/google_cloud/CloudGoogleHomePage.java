@@ -21,6 +21,7 @@ public class CloudGoogleHomePage {
     @FindBy(name = "q")
     private WebElement searchButton;
 
+    @FindBy(xpath = "//button[@type='submit']")
     private WebElement searchResultsButton;
 
     public CloudGoogleHomePage(WebDriver driver) {
@@ -39,7 +40,6 @@ public class CloudGoogleHomePage {
 
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@type='submit']")));
-        searchResultsButton = driver.findElement(By.xpath("//button[@type='submit']"));
         searchResultsButton.click();
 
         waitForSearchResults();

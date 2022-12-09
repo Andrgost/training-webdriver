@@ -30,8 +30,14 @@ public class TempMailPageTest {
     @Test(description = "Verify Provisioning model (VM Class) field",
             dataProvider = "PageFieldsValues",
             dataProviderClass = ParametersByDataProvider.class)
-    public void checkPriceInEmail(String provisioningModel,
+    public void checkPriceInEmail(Integer numberOfInstances,
+                                  String whatAreTheseInstancesFor,
+                                  String operatingSystemSoftware,
+                                  String provisioningModel,
                                   String machineType,
+                                  Boolean gpu,
+                                  String gpuType,
+                                  String numberOfGPU,
                                   String localSSD,
                                   String datacenterLocation) throws IOException, UnsupportedFlavorException {
         GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driver)
@@ -40,8 +46,14 @@ public class TempMailPageTest {
                 .clickSearchResult();
 
         EstimatePage estimatePage = calculatorPage.clickComputeEngineTab()
-                .fillInComputeEngineForm(provisioningModel,
+                .fillInComputeEngineForm(numberOfInstances,
+                        whatAreTheseInstancesFor,
+                        operatingSystemSoftware,
+                        provisioningModel,
                         machineType,
+                        gpu,
+                        gpuType,
+                        numberOfGPU,
                         localSSD,
                         datacenterLocation);
 

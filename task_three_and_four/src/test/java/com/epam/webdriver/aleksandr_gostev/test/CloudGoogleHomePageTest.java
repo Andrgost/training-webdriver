@@ -28,8 +28,14 @@ public class CloudGoogleHomePageTest {
     @Test(description = "Verify Provisioning model (VM Class) field",
             dataProvider = "PageFieldsValues",
             dataProviderClass = ParametersByDataProvider.class)
-    public void checkProvisioningModel(String provisioningModel,
+    public void checkProvisioningModel(Integer numberOfInstances,
+                                       String whatAreTheseInstancesFor,
+                                       String operatingSystemSoftware,
+                                       String provisioningModel,
                                        String machineType,
+                                       Boolean gpu,
+                                       String gpuType,
+                                       String numberOfGPU,
                                        String localSSD,
                                        String datacenterLocation) {
 
@@ -40,8 +46,14 @@ public class CloudGoogleHomePageTest {
 
         String provisioningModelActual = calculatorPage
                 .clickComputeEngineTab()
-                .fillInComputeEngineForm(provisioningModel,
+                .fillInComputeEngineForm(numberOfInstances,
+                        whatAreTheseInstancesFor,
+                        operatingSystemSoftware,
+                        provisioningModel,
                         machineType,
+                        gpu,
+                        gpuType,
+                        numberOfGPU,
                         localSSD,
                         datacenterLocation)
                 .getProvisioningModelText();
@@ -52,8 +64,14 @@ public class CloudGoogleHomePageTest {
     @Test(description = "Verify Provisioning model (VM Class) field",
             dataProvider = "PageFieldsValues",
             dataProviderClass = ParametersByDataProvider.class)
-    public void checkMachineType(String provisioningModel,
+    public void checkMachineType(Integer numberOfInstances,
+                                 String whatAreTheseInstancesFor,
+                                 String operatingSystemSoftware,
+                                 String provisioningModel,
                                  String machineType,
+                                 Boolean gpu,
+                                 String gpuType,
+                                 String numberOfGPU,
                                  String localSSD,
                                  String datacenterLocation) {
 
@@ -64,8 +82,14 @@ public class CloudGoogleHomePageTest {
 
         String machineTypeActual = calculatorPage
                 .clickComputeEngineTab()
-                .fillInComputeEngineForm(provisioningModel,
+                .fillInComputeEngineForm(numberOfInstances,
+                        whatAreTheseInstancesFor,
+                        operatingSystemSoftware,
+                        provisioningModel,
                         machineType,
+                        gpu,
+                        gpuType,
+                        numberOfGPU,
                         localSSD,
                         datacenterLocation)
                 .getMachineTypeText();
@@ -76,8 +100,14 @@ public class CloudGoogleHomePageTest {
     @Test(description = "Verify Provisioning model (VM Class) field",
             dataProvider = "PageFieldsValues",
             dataProviderClass = ParametersByDataProvider.class)
-    public void checkDatacenterLocation(String provisioningModel,
+    public void checkDatacenterLocation(Integer numberOfInstances,
+                                        String whatAreTheseInstancesFor,
+                                        String operatingSystemSoftware,
+                                        String provisioningModel,
                                         String machineType,
+                                        Boolean gpu,
+                                        String gpuType,
+                                        String numberOfGPU,
                                         String localSSD,
                                         String datacenterLocation) {
 
@@ -88,8 +118,14 @@ public class CloudGoogleHomePageTest {
 
         String datacenterLocationActual = calculatorPage
                 .clickComputeEngineTab()
-                .fillInComputeEngineForm(provisioningModel,
+                .fillInComputeEngineForm(numberOfInstances,
+                        whatAreTheseInstancesFor,
+                        operatingSystemSoftware,
+                        provisioningModel,
                         machineType,
+                        gpu,
+                        gpuType,
+                        numberOfGPU,
                         localSSD,
                         datacenterLocation)
                 .getDatacenterLocationText();
@@ -100,8 +136,14 @@ public class CloudGoogleHomePageTest {
     @Test(description = "Verify Provisioning model (VM Class) field",
             dataProvider = "PageFieldsValues",
             dataProviderClass = ParametersByDataProvider.class)
-    public void checkLocalSSD(String provisioningModel,
+    public void checkLocalSSD(Integer numberOfInstances,
+                              String whatAreTheseInstancesFor,
+                              String operatingSystemSoftware,
+                              String provisioningModel,
                               String machineType,
+                              Boolean gpu,
+                              String gpuType,
+                              String numberOfGPU,
                               String localSSD,
                               String datacenterLocation) {
 
@@ -112,8 +154,14 @@ public class CloudGoogleHomePageTest {
 
         String localSSDActual = calculatorPage
                 .clickComputeEngineTab()
-                .fillInComputeEngineForm(provisioningModel,
+                .fillInComputeEngineForm(numberOfInstances,
+                        whatAreTheseInstancesFor,
+                        operatingSystemSoftware,
+                        provisioningModel,
                         machineType,
+                        gpu,
+                        gpuType,
+                        numberOfGPU,
                         localSSD,
                         datacenterLocation)
                 .getLocalSSDOptionText();
@@ -124,8 +172,14 @@ public class CloudGoogleHomePageTest {
     @Test(description = "Verify Provisioning model (VM Class) field",
             dataProvider = "PageFieldsValues",
             dataProviderClass = ParametersByDataProvider.class)
-    public void checkTotalPrice(String provisioningModel,
+    public void checkTotalPrice(Integer numberOfInstances,
+                                String whatAreTheseInstancesFor,
+                                String operatingSystemSoftware,
+                                String provisioningModel,
                                 String machineType,
+                                Boolean gpu,
+                                String gpuType,
+                                String numberOfGPU,
                                 String localSSD,
                                 String datacenterLocation) {
 
@@ -136,8 +190,14 @@ public class CloudGoogleHomePageTest {
 
         String totalPrice = calculatorPage
                 .clickComputeEngineTab()
-                .fillInComputeEngineForm(provisioningModel,
+                .fillInComputeEngineForm(numberOfInstances,
+                        whatAreTheseInstancesFor,
+                        operatingSystemSoftware,
+                        provisioningModel,
                         machineType,
+                        gpu,
+                        gpuType,
+                        numberOfGPU,
                         localSSD,
                         datacenterLocation)
                 .getTotalPrice();
