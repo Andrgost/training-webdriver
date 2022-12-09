@@ -1,5 +1,6 @@
 package com.epam.webdriver.aleksandr_gostev.page.google_cloud;
 
+import com.epam.webdriver.aleksandr_gostev.utilities.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -29,6 +30,9 @@ public class EstimatePage {
     @FindBy(xpath = "//div[contains(@class, 'cpc-cart-total')]/h2/b")
     private WebElement totalPrice;
 
+    @FindBy(xpath = "//*[@id='Email Estimate']")
+    private WebElement emailEstimateButton;
+
     public EstimatePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -55,9 +59,9 @@ public class EstimatePage {
     }
 
     public EmailYourEstimatePage clickEmailEstimateButton() {
-        WebElement emailEstimateButton = new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions
-                        .elementToBeClickable(By.xpath("//*[@id='Email Estimate']")));
+                        .elementToBeClickable(emailEstimateButton));
 
         ((JavascriptExecutor)driver).executeScript("arguments[0].click();", emailEstimateButton);
         return new EmailYourEstimatePage(driver);

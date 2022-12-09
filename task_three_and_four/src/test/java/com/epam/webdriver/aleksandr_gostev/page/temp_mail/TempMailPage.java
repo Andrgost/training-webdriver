@@ -23,6 +23,9 @@ public class TempMailPage {
     @FindBy(id = "pre_copy")
     private WebElement copyMailAddressButton;
 
+    @FindBy(xpath = "//*[@class='inbox']/div[@class='mail']")
+    private WebElement letter;
+
     public TempMailPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -42,9 +45,9 @@ public class TempMailPage {
     }
 
     public LetterPage clickLetter() {
-        WebElement letter = new WebDriverWait(driver, Duration.ofSeconds(20))
+        new WebDriverWait(driver, Duration.ofSeconds(20))
                 .until(ExpectedConditions
-                        .elementToBeClickable(By.xpath("//*[@class='inbox']/div[@class='mail']")));
+                        .elementToBeClickable(letter));
         letter.click();
         return new LetterPage(driver);
     }

@@ -39,7 +39,7 @@ public class CloudGoogleHomePage {
         searchButton.sendKeys(SEARCH_TERM);
 
         new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@type='submit']")));
+                .until(ExpectedConditions.visibilityOf(searchResultsButton));
         searchResultsButton.click();
 
         waitForSearchResults();
