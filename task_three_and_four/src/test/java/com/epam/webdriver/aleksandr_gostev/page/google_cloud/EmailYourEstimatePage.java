@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class EmailYourEstimatePage extends BasePage {
-    private WebDriver driver;
 
     @FindBy(xpath = "//md-input-container/input[@type='email']")
     private WebElement emailInput;
@@ -22,7 +21,6 @@ public class EmailYourEstimatePage extends BasePage {
 
     public EmailYourEstimatePage(WebDriver driver) {
         super(driver);
-        this.driver = super.getDriver();
     }
 
     public TempMailPage sendEmail() throws IOException, UnsupportedFlavorException {

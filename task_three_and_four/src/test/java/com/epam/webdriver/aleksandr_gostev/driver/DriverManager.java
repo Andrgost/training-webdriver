@@ -1,4 +1,4 @@
-package com.epam.webdriver.aleksandr_gostev.utilities;
+package com.epam.webdriver.aleksandr_gostev.driver;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,13 +13,11 @@ public class DriverManager {
         return driver;
     }
 
-    public WebDriver createWebDriver() {
+    public void createWebDriver() {
         driver = new ChromeDriver();
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
-
-        return driver;
     }
 
     public void quitWebDriver() {

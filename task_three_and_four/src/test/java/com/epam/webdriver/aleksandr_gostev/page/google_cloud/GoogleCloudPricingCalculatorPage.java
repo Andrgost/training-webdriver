@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class GoogleCloudPricingCalculatorPage extends BasePage {
-    private WebDriver driver;
 
     @FindBy(xpath = "//md-pagination-wrapper/descendant::div[@title='Compute Engine']")
     private WebElement computeEngineTab;
@@ -20,34 +19,27 @@ public class GoogleCloudPricingCalculatorPage extends BasePage {
 
     @FindBy(xpath = "//md-select[@ng-model='listingCtrl.computeServer.os']")
     private WebElement operatingSystemSoftwareSelect;
-    private WebElement operatingSystemSoftwareOption;
 
     @FindBy(xpath = "//md-select[@ng-model='listingCtrl.computeServer.class']")
     private WebElement provisioningModelSelect;
-    private WebElement provisioningModelOption;
 
     @FindBy(xpath = "//md-select[@ng-model='listingCtrl.computeServer.instance']")
     private WebElement machineTypeSelect;
-    private WebElement machineTypeOption;
 
     @FindBy(xpath = "//*[@ng-model='listingCtrl.computeServer.addGPUs']")
     private WebElement GPUCheckbox;
 
     @FindBy(xpath = "//*[@ng-model='listingCtrl.computeServer.gpuType']")
     private WebElement GPUTypeSelect;
-    private WebElement GPUTypeOption;
 
     @FindBy(xpath = "//*[@ng-model='listingCtrl.computeServer.gpuCount']")
     private WebElement numberOfGPUSelect;
-    private WebElement numberOfGPUOption;
 
     @FindBy(xpath = "//*[@ng-model='listingCtrl.computeServer.ssd']")
     private WebElement localSSDSelect;
-    private WebElement localSSDOption;
 
     @FindBy(xpath = "//*[@ng-model='listingCtrl.computeServer.location']")
     private WebElement datacenterLocationSelect;
-    private WebElement datacenterLocationOption;
 
     @FindBy(xpath = "//*[@ng-model='listingCtrl.computeServer.cud']")
     private WebElement committedUsageSelect;
@@ -58,7 +50,6 @@ public class GoogleCloudPricingCalculatorPage extends BasePage {
 
     public GoogleCloudPricingCalculatorPage(WebDriver driver) {
         super(driver);
-        this.driver = super.getDriver();
     }
 
     public GoogleCloudPricingCalculatorPage clickComputeEngineTab() {
@@ -90,17 +81,17 @@ public class GoogleCloudPricingCalculatorPage extends BasePage {
 
         //Operating System / Software dropdown
         operatingSystemSoftwareSelect.click();
-        operatingSystemSoftwareOption = driver.findElement(By.xpath(String.format("//md-option[@value='%s']/div[@class='md-text']", operatingSystemSoftware)));
+        WebElement operatingSystemSoftwareOption = driver.findElement(By.xpath(String.format("//md-option[@value='%s']/div[@class='md-text']", operatingSystemSoftware)));
         operatingSystemSoftwareOption.click();
 
         //Provisioning model (VM Class) dropdown
         provisioningModelSelect.click();
-        provisioningModelOption = driver.findElement(By.xpath(String.format("//md-select-menu/md-content/md-option/div[contains(text(), '%s')]", provisioningModel)));
+        WebElement provisioningModelOption = driver.findElement(By.xpath(String.format("//md-select-menu/md-content/md-option/div[contains(text(), '%s')]", provisioningModel)));
         provisioningModelOption.click();
 
         //Machine type (Instance type) dropdown
         machineTypeSelect.click();
-        machineTypeOption = driver.findElement(By.xpath(String.format("//md-option[@value='%s']", machineType)));
+        WebElement machineTypeOption = driver.findElement(By.xpath(String.format("//md-option[@value='%s']", machineType)));
         machineTypeOption.click();
 
         //Add GPUs checkbox
@@ -108,22 +99,22 @@ public class GoogleCloudPricingCalculatorPage extends BasePage {
 
         //GPU type dropdown
         GPUTypeSelect.click();
-        GPUTypeOption = driver.findElement(By.xpath(String.format("//md-option[@value='%s']", gpuType)));
+        WebElement GPUTypeOption = driver.findElement(By.xpath(String.format("//md-option[@value='%s']", gpuType)));
         GPUTypeOption.click();
 
         //Number of GPUs dropdown
         numberOfGPUSelect.click();
-        numberOfGPUOption = driver.findElement(By.xpath(String.format("//md-option[contains(@ng-repeat,'gpuType') and @value='%s']", numberOfGPU)));
+        WebElement numberOfGPUOption = driver.findElement(By.xpath(String.format("//md-option[contains(@ng-repeat,'gpuType') and @value='%s']", numberOfGPU)));
         numberOfGPUOption.click();
 
         //Local SSD dropdown
         localSSDSelect.click();
-        localSSDOption = driver.findElement(By.xpath(String.format("//md-option[contains(@ng-repeat, 'dynamicSsd')]/div[contains(text(), '%s')]", localSSD)));
+        WebElement localSSDOption = driver.findElement(By.xpath(String.format("//md-option[contains(@ng-repeat, 'dynamicSsd')]/div[contains(text(), '%s')]", localSSD)));
         localSSDOption.click();
 
         //Datacenter Location dropdown
         datacenterLocationSelect.click();
-        datacenterLocationOption = driver.findElement(By.xpath(String.format("//md-option[contains(@ng-repeat,'computeServer') and @value='%s']/div", datacenterLocation)));
+        WebElement datacenterLocationOption = driver.findElement(By.xpath(String.format("//md-option[contains(@ng-repeat,'computeServer') and @value='%s']/div", datacenterLocation)));
         datacenterLocationOption.click();
 
         //Committed usage - depends on Provisioning model = Regular

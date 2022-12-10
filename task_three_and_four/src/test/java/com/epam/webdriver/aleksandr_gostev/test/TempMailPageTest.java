@@ -1,12 +1,12 @@
 package com.epam.webdriver.aleksandr_gostev.test;
 
+import com.epam.webdriver.aleksandr_gostev.driver.DriverManager;
 import com.epam.webdriver.aleksandr_gostev.page.google_cloud.CloudGoogleHomePage;
 import com.epam.webdriver.aleksandr_gostev.page.google_cloud.EmailYourEstimatePage;
 import com.epam.webdriver.aleksandr_gostev.page.google_cloud.EstimatePage;
 import com.epam.webdriver.aleksandr_gostev.page.google_cloud.GoogleCloudPricingCalculatorPage;
 import com.epam.webdriver.aleksandr_gostev.page.temp_mail.LetterPage;
 import com.epam.webdriver.aleksandr_gostev.testDataParams.ParametersByDataProvider;
-import com.epam.webdriver.aleksandr_gostev.utilities.DriverManager;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

@@ -13,8 +13,7 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
 public class TempMailPage extends BasePage {
-    private final String TEMP_MAIL_URL = "https://tempmail.plus/";
-    private WebDriver driver;
+    private static final String TEMP_MAIL_URL = "https://tempmail.plus/";
 
     @FindBy(id = "pre_copy")
     private WebElement copyMailAddressButton;
@@ -24,7 +23,6 @@ public class TempMailPage extends BasePage {
 
     public TempMailPage(WebDriver driver) {
         super(driver);
-        this.driver = super.getDriver();
     }
 
     public TempMailPage openTempMailPageInNewTab() {

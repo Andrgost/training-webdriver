@@ -11,9 +11,7 @@ import java.util.List;
 public class CloudGoogleHomePage extends BasePage {
 
     private static final String HOMEPAGE_URL = "https://cloud.google.com/";
-    private WebDriver driver;
-
-    private final String SEARCH_TERM = "Google Cloud Platform Pricing Calculator";
+    private static final String SEARCH_TERM = "Google Cloud Platform Pricing Calculator";
 
     @FindBy(name = "q")
     private WebElement searchButton;
@@ -21,9 +19,11 @@ public class CloudGoogleHomePage extends BasePage {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement searchResultsButton;
 
+    @FindBy(xpath = "//div[contains(@class, 'gsc-webResult') and contains(@class, 'gsc-result')]")
+    private List<WebElement> searchResults;
+
     public CloudGoogleHomePage(WebDriver driver) {
         super(driver);
-        this.driver = super.getDriver();
     }
 
     public CloudGoogleHomePage openPage() {
@@ -38,16 +38,13 @@ public class CloudGoogleHomePage extends BasePage {
         waitForVisibility(searchResultsButton);
         searchResultsButton.click();
 
-        waitForPresence("//div[contains(@class, 'gsc-webResult') and contains(@class, 'gsc-result')]");
+        waitForVisibilityAll(searchResults);
 
         return this;
     }
 
     public GoogleCloudPricingCalculatorPage clickSearchResult() {
-        List<WebElement> searchResultLinks = driver.findElements(By
-                .xpath("//div[contains(@class, 'gsc-webResult') and contains(@class, 'gsc-result')]"));
-
-        searchResultLinks.get(1).findElement(By.linkText("Google Cloud Pricing Calculator")).click();
+        searchResults.get(1).findElement(By.linkText("Google Cloud Pricing Calculator")).click();
 
         return new GoogleCloudPricingCalculatorPage(driver);
     }

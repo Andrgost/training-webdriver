@@ -1,13 +1,12 @@
 package com.epam.webdriver.aleksandr_gostev.page.google_cloud;
 
 import com.epam.webdriver.aleksandr_gostev.page.BasePage;
-import com.epam.webdriver.aleksandr_gostev.utilities.Utils;
+import com.epam.webdriver.aleksandr_gostev.utilities.JSExecutorUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class EstimatePage extends BasePage {
-    private WebDriver driver;
 
     @FindBy(xpath = "//md-list-item/div[contains(text(), 'Spot')]")
     private WebElement provisioningModel;
@@ -29,7 +28,6 @@ public class EstimatePage extends BasePage {
 
     public EstimatePage(WebDriver driver) {
         super(driver);
-        this.driver = super.getDriver();
     }
 
     public String getProvisioningModelText() {
@@ -55,7 +53,7 @@ public class EstimatePage extends BasePage {
     public EmailYourEstimatePage clickEmailEstimateButton() {
         waitForClick(emailEstimateButton);
 
-        Utils.clickElementViaJS(driver, emailEstimateButton);
+        JSExecutorUtils.clickElementViaJS(driver, emailEstimateButton);
         return new EmailYourEstimatePage(driver);
     }
 }
