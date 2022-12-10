@@ -11,10 +11,8 @@ import java.util.List;
 public class CloudGoogleHomePage extends BasePage {
 
     private static final String HOMEPAGE_URL = "https://cloud.google.com/";
-    private WebDriver driver;
-
     private final String SEARCH_TERM = "Google Cloud Platform Pricing Calculator";
-
+    private final WebDriver driver;
     @FindBy(name = "q")
     private WebElement searchButton;
 

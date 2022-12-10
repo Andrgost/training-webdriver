@@ -14,13 +14,13 @@ public class BasePage {
 
     private final WebDriver driver;
 
-    public WebDriver getDriver() {
-        return driver;
-    }
-
     public BasePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 
     public WebElement waitForVisibility(WebElement webElement) {

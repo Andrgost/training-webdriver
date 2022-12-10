@@ -4,7 +4,6 @@ import com.epam.webdriver.aleksandr_gostev.page.google_cloud.CloudGoogleHomePage
 import com.epam.webdriver.aleksandr_gostev.page.google_cloud.GoogleCloudPricingCalculatorPage;
 import com.epam.webdriver.aleksandr_gostev.testDataParams.ParametersByDataProvider;
 import com.epam.webdriver.aleksandr_gostev.utilities.DriverManager;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

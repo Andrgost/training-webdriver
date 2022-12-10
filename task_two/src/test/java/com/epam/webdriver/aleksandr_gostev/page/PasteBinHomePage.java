@@ -8,7 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class PasteBinHomePage {
     private static final String HOMEPAGE_URL = "https://pastebin.com";
-
     private final WebDriver driver;
 
     @FindBy(id = "postform-text")
@@ -16,11 +15,9 @@ public class PasteBinHomePage {
 
     @FindBy(id = "select2-postform-format-container")
     private WebElement pasteSyntaxHighlightingDropdown;
-    private WebElement pasteSyntaxHighlightingOption;
 
     @FindBy(id = "select2-postform-expiration-container")
     private WebElement pasteExpirationDropdown;
-    private WebElement pasteExpirationOption;
 
     @FindBy(id = "postform-name")
     private WebElement pasteNameTitleInput;
@@ -42,16 +39,16 @@ public class PasteBinHomePage {
         pasteTextArea.sendKeys(code);
 
         pasteSyntaxHighlightingDropdown.click();
-        pasteSyntaxHighlightingOption = driver.findElement(By.xpath(String.format("//li[text()='%s']", highlighting)));
+        WebElement pasteSyntaxHighlightingOption = driver.findElement(By.xpath(String.format("//li[text()='%s']", highlighting)));
         pasteSyntaxHighlightingOption.click();
 
         pasteExpirationDropdown.click();
-        pasteExpirationOption = driver.findElement(By.xpath(String.format("//li[text()='%s']", expiration)));
+        WebElement pasteExpirationOption = driver.findElement(By.xpath(String.format("//li[text()='%s']", expiration)));
         pasteExpirationOption.click();
 
         pasteNameTitleInput.sendKeys(name);
         createNewPasteButton.click();
 
-        return new CreatedPaste(driver, name);
+        return new CreatedPaste(driver);
     }
 }

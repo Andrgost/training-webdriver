@@ -8,14 +8,12 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.Objects;
 
 public class CreatedPaste {
-    private final WebDriver driver;
     private final String pageTitle;
 
     @FindBy(xpath = "//*[@class='info-top']/h1")
     private WebElement pasteTitle;
 
     public CreatedPaste(WebDriver driver, String pageTitle) {
-        this.driver = driver;
         this.pageTitle = pageTitle;
         PageFactory.initElements(driver, this);
     }

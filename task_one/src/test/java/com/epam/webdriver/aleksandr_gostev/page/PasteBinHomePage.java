@@ -16,8 +16,6 @@ public class PasteBinHomePage {
     @FindBy(id = "select2-postform-expiration-container")
     private WebElement pasteExpirationDropdown;
 
-    private WebElement pasteExpirationOption;
-
     @FindBy(id = "postform-name")
     private WebElement pasteNameTitleInput;
 
@@ -38,7 +36,7 @@ public class PasteBinHomePage {
         pasteTextArea.sendKeys(code);
 
         pasteExpirationDropdown.click();
-        pasteExpirationOption = driver.findElement(By.xpath(String.format("//li[text()='%s']", duration)));
+        WebElement pasteExpirationOption = driver.findElement(By.xpath(String.format("//li[text()='%s']", duration)));
         pasteExpirationOption.click();
 
         pasteNameTitleInput.sendKeys(name);

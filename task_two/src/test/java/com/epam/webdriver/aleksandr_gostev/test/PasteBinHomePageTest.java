@@ -12,7 +12,6 @@ import org.testng.annotations.Test;
 
 public class PasteBinHomePageTest {
     private WebDriver driver;
-
     private CreatedPaste createdPaste;
 
     @BeforeMethod(alwaysRun = true)

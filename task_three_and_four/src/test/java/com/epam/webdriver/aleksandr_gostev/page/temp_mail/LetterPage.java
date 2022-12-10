@@ -4,17 +4,17 @@ import com.epam.webdriver.aleksandr_gostev.page.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LetterPage extends BasePage {
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
     @FindBy(xpath = "//*[text()='Total Estimated Monthly Cost']/parent::*/following-sibling::*/h3")
     private WebElement costUSD;
+
     public LetterPage(WebDriver driver) {
         super(driver);
         this.driver = super.getDriver();
