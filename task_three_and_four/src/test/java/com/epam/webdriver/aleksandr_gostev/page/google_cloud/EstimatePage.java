@@ -1,19 +1,13 @@
 package com.epam.webdriver.aleksandr_gostev.page.google_cloud;
 
+import com.epam.webdriver.aleksandr_gostev.page.BasePage;
 import com.epam.webdriver.aleksandr_gostev.utilities.Utils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
-public class EstimatePage {
-    private final WebDriver driver;
+public class EstimatePage extends BasePage {
+    private WebDriver driver;
 
     @FindBy(xpath = "//md-list-item/div[contains(text(), 'Spot')]")
     private WebElement provisioningModel;
@@ -34,8 +28,8 @@ public class EstimatePage {
     private WebElement emailEstimateButton;
 
     public EstimatePage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
+        this.driver = super.getDriver();
     }
 
     public String getProvisioningModelText() {
@@ -59,11 +53,9 @@ public class EstimatePage {
     }
 
     public EmailYourEstimatePage clickEmailEstimateButton() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions
-                        .elementToBeClickable(emailEstimateButton));
+        waitForClick(emailEstimateButton);
 
-        ((JavascriptExecutor)driver).executeScript("arguments[0].click();", emailEstimateButton);
+        Utils.clickElementViaJS(driver, emailEstimateButton);
         return new EmailYourEstimatePage(driver);
     }
 }

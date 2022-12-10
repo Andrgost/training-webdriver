@@ -1,13 +1,13 @@
 package com.epam.webdriver.aleksandr_gostev.page.google_cloud;
 
+import com.epam.webdriver.aleksandr_gostev.page.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class GoogleCloudPricingCalculatorPage {
-    private final WebDriver driver;
+public class GoogleCloudPricingCalculatorPage extends BasePage {
+    private WebDriver driver;
 
     @FindBy(xpath = "//md-pagination-wrapper/descendant::div[@title='Compute Engine']")
     private WebElement computeEngineTab;
@@ -57,8 +57,8 @@ public class GoogleCloudPricingCalculatorPage {
     private WebElement addToEstimateButton;
 
     public GoogleCloudPricingCalculatorPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
+        this.driver = super.getDriver();
     }
 
     public GoogleCloudPricingCalculatorPage clickComputeEngineTab() {

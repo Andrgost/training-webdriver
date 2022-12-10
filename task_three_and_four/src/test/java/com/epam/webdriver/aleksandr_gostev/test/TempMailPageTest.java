@@ -6,8 +6,7 @@ import com.epam.webdriver.aleksandr_gostev.page.google_cloud.EstimatePage;
 import com.epam.webdriver.aleksandr_gostev.page.google_cloud.GoogleCloudPricingCalculatorPage;
 import com.epam.webdriver.aleksandr_gostev.page.temp_mail.LetterPage;
 import com.epam.webdriver.aleksandr_gostev.testDataParams.ParametersByDataProvider;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import com.epam.webdriver.aleksandr_gostev.utilities.DriverManager;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -15,16 +14,14 @@ import org.testng.annotations.Test;
 
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
-import java.time.Duration;
 
 public class TempMailPageTest {
-    private WebDriver driver;
+    private DriverManager driverManager;
 
     @BeforeMethod(alwaysRun = true)
     public void browserSetup() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        driverManager = new DriverManager();
+        driverManager.createWebDriver();
     }
 
     @Test(description = "Verify Provisioning model (VM Class) field",
@@ -39,8 +36,13 @@ public class TempMailPageTest {
                                   String gpuType,
                                   String numberOfGPU,
                                   String localSSD,
-                                  String datacenterLocation) throws IOException, UnsupportedFlavorException {
-        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driver)
+                                  String datacenterLocation,
+                                  String provisioningModelExpected,
+                                  String machineTypeExpected,
+                                  String localSSDExpected,
+                                  String datacenterLocationExpected,
+                                  Double totalPriceExpected) throws IOException, UnsupportedFlavorException {
+        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driverManager.getDriver())
                 .openPage()
                 .searchForTerm()
                 .clickSearchResult();
@@ -62,14 +64,13 @@ public class TempMailPageTest {
         LetterPage letterPage = emailYourEstimatePage.sendEmail()
                 .clickLetter();
 
-        double totalPriceActual = letterPage.getTotalEstimatedMonthlyCost();
+        Double totalPriceActual = letterPage.getTotalEstimatedMonthlyCost();
 
-        Assert.assertEquals(totalPriceActual, 2079.78D, "Total price is not equal");
+        Assert.assertEquals(totalPriceActual, totalPriceExpected, "Total price is not equal");
     }
 
     @AfterMethod(alwaysRun = true)
     public void browserTearDown() {
-        driver.quit();
-        driver = null;
+        driverManager.quitWebDriver();
     }
 }

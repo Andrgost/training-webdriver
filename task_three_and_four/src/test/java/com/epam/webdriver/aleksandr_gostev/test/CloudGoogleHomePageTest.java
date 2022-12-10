@@ -3,26 +3,24 @@ package com.epam.webdriver.aleksandr_gostev.test;
 import com.epam.webdriver.aleksandr_gostev.page.google_cloud.CloudGoogleHomePage;
 import com.epam.webdriver.aleksandr_gostev.page.google_cloud.GoogleCloudPricingCalculatorPage;
 import com.epam.webdriver.aleksandr_gostev.testDataParams.ParametersByDataProvider;
+import com.epam.webdriver.aleksandr_gostev.utilities.DriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CloudGoogleHomePageTest {
 
-    private WebDriver driver;
+    private DriverManager driverManager;
 
     @BeforeMethod(alwaysRun = true)
     public void browserSetup() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        driverManager = new DriverManager();
+        driverManager.createWebDriver();
     }
 
     @Test(description = "Verify Provisioning model (VM Class) field",
@@ -44,7 +42,7 @@ public class CloudGoogleHomePageTest {
                                        String datacenterLocationExpected,
                                        Double totalPriceExpected) {
 
-        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driver)
+        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driverManager.getDriver())
                 .openPage()
                 .searchForTerm()
                 .clickSearchResult();
@@ -85,7 +83,7 @@ public class CloudGoogleHomePageTest {
                                  String datacenterLocationExpected,
                                  Double totalPriceExpected) {
 
-        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driver)
+        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driverManager.getDriver())
                 .openPage()
                 .searchForTerm()
                 .clickSearchResult();
@@ -126,7 +124,7 @@ public class CloudGoogleHomePageTest {
                                         String datacenterLocationExpected,
                                         Double totalPriceExpected) {
 
-        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driver)
+        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driverManager.getDriver())
                 .openPage()
                 .searchForTerm()
                 .clickSearchResult();
@@ -167,7 +165,7 @@ public class CloudGoogleHomePageTest {
                               String datacenterLocationExpected,
                               Double totalPriceExpected) {
 
-        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driver)
+        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driverManager.getDriver())
                 .openPage()
                 .searchForTerm()
                 .clickSearchResult();
@@ -208,7 +206,7 @@ public class CloudGoogleHomePageTest {
                                 String datacenterLocationExpected,
                                 Double totalPriceExpected) {
 
-        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driver)
+        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driverManager.getDriver())
                 .openPage()
                 .searchForTerm()
                 .clickSearchResult();
@@ -241,7 +239,6 @@ public class CloudGoogleHomePageTest {
 
     @AfterMethod(alwaysRun = true)
     public void browserTearDown() {
-        driver.quit();
-        driver = null;
+        driverManager.quitWebDriver();
     }
 }

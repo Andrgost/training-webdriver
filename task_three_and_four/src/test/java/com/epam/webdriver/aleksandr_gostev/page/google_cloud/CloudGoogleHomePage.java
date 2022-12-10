@@ -1,20 +1,17 @@
 package com.epam.webdriver.aleksandr_gostev.page.google_cloud;
 
+import com.epam.webdriver.aleksandr_gostev.page.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 
-public class CloudGoogleHomePage {
+public class CloudGoogleHomePage extends BasePage {
 
     private static final String HOMEPAGE_URL = "https://cloud.google.com/";
-    private final WebDriver driver;
+    private WebDriver driver;
 
     private final String SEARCH_TERM = "Google Cloud Platform Pricing Calculator";
 
@@ -25,8 +22,8 @@ public class CloudGoogleHomePage {
     private WebElement searchResultsButton;
 
     public CloudGoogleHomePage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
+        this.driver = super.getDriver();
     }
 
     public CloudGoogleHomePage openPage() {
@@ -38,11 +35,10 @@ public class CloudGoogleHomePage {
         searchButton.click();
         searchButton.sendKeys(SEARCH_TERM);
 
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOf(searchResultsButton));
+        waitForVisibility(searchResultsButton);
         searchResultsButton.click();
 
-        waitForSearchResults();
+        waitForPresence("//div[contains(@class, 'gsc-webResult') and contains(@class, 'gsc-result')]");
 
         return this;
     }
@@ -54,12 +50,5 @@ public class CloudGoogleHomePage {
         searchResultLinks.get(1).findElement(By.linkText("Google Cloud Pricing Calculator")).click();
 
         return new GoogleCloudPricingCalculatorPage(driver);
-    }
-
-    private void waitForSearchResults() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions
-                        .presenceOfAllElementsLocatedBy(By
-                                .xpath("//div[contains(@class, 'gsc-webResult') and contains(@class, 'gsc-result')]")));
     }
 }

@@ -1,18 +1,18 @@
 package com.epam.webdriver.aleksandr_gostev.page.google_cloud;
 
+import com.epam.webdriver.aleksandr_gostev.page.BasePage;
 import com.epam.webdriver.aleksandr_gostev.page.temp_mail.TempMailPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class EmailYourEstimatePage {
-    private final WebDriver driver;
+public class EmailYourEstimatePage extends BasePage {
+    private WebDriver driver;
 
     @FindBy(xpath = "//md-input-container/input[@type='email']")
     private WebElement emailInput;
@@ -21,8 +21,8 @@ public class EmailYourEstimatePage {
     private WebElement sendEmailButton;
 
     public EmailYourEstimatePage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
+        this.driver = super.getDriver();
     }
 
     public TempMailPage sendEmail() throws IOException, UnsupportedFlavorException {

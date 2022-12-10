@@ -1,24 +1,20 @@
 package com.epam.webdriver.aleksandr_gostev.page.temp_mail;
 
-import org.openqa.selenium.By;
+import com.epam.webdriver.aleksandr_gostev.page.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WindowType;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
-import java.time.Duration;
 
-public class TempMailPage {
+public class TempMailPage extends BasePage {
     private final String TEMP_MAIL_URL = "https://tempmail.plus/";
-    private final WebDriver driver;
+    private WebDriver driver;
 
     @FindBy(id = "pre_copy")
     private WebElement copyMailAddressButton;
@@ -27,8 +23,8 @@ public class TempMailPage {
     private WebElement letter;
 
     public TempMailPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
+        this.driver = super.getDriver();
     }
 
     public TempMailPage openTempMailPageInNewTab() {
@@ -45,9 +41,8 @@ public class TempMailPage {
     }
 
     public LetterPage clickLetter() {
-        new WebDriverWait(driver, Duration.ofSeconds(20))
-                .until(ExpectedConditions
-                        .elementToBeClickable(letter));
+        waitForClick(letter);
+
         letter.click();
         return new LetterPage(driver);
     }

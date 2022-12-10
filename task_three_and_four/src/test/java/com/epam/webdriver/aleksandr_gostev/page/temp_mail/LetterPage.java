@@ -1,5 +1,6 @@
 package com.epam.webdriver.aleksandr_gostev.page.temp_mail;
 
+import com.epam.webdriver.aleksandr_gostev.page.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,14 +9,15 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class LetterPage {
-    private final WebDriver driver;
+public class LetterPage extends BasePage {
+
+    private WebDriver driver;
 
     @FindBy(xpath = "//*[text()='Total Estimated Monthly Cost']/parent::*/following-sibling::*/h3")
     private WebElement costUSD;
     public LetterPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
+        this.driver = super.getDriver();
     }
 
     public double getTotalEstimatedMonthlyCost() {
