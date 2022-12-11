@@ -25,7 +25,8 @@ public class CloudGoogleHomePageTest {
     @Test(description = "Verify Datacenter Location field",
             dataProvider = "fieldValuesDataProvider",
             dataProviderClass = ParametersByDataProvider.class)
-    public void checkDatacenterLocation(Integer numberOfInstances,
+    public void checkDatacenterLocation(String searchTerm,
+                                        int numberOfInstances,
                                         String operatingSystemSoftware,
                                         String provisioningModel,
                                         String machineType,
@@ -36,10 +37,9 @@ public class CloudGoogleHomePageTest {
                                         String datacenterLocationExpected,
                                         String machineTypeExpected,
                                         String totalPriceExpected) {
-
         GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driverManager.getDriver())
                 .openPage()
-                .searchForTerm()
+                .searchForTerm(searchTerm)
                 .clickSearchResult();
 
         EstimatePage estimatePage = calculatorPage

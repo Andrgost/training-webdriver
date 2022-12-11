@@ -13,18 +13,19 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class TempMailPageTest {
-    private DriverManager driverManager;
+
+    private final DriverManager driverManager = new DriverManager();
 
     @BeforeMethod(alwaysRun = true)
     public void browserSetup() {
-        driverManager = new DriverManager();
         driverManager.createWebDriver();
     }
 
     @Test(description = "Verify Provisioning model (VM Class) field",
             dataProvider = "fieldValuesDataProvider",
             dataProviderClass = ParametersByDataProvider.class)
-    public void checkPriceInEmail(Integer numberOfInstances,
+    public void checkPriceInEmail(String searchTerm,
+                                  int numberOfInstances,
                                   String operatingSystemSoftware,
                                   String provisioningModel,
                                   String machineType,
@@ -37,10 +38,11 @@ public class TempMailPageTest {
                                   String totalPriceExpected) {
         GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driverManager.getDriver())
                 .openPage()
-                .searchForTerm()
+                .searchForTerm(searchTerm)
                 .clickSearchResult();
 
-        EstimatePage estimatePage = calculatorPage.clickComputeEngineTab()
+        EstimatePage estimatePage = calculatorPage
+                .clickComputeEngineTab()
                 .fillInComputeEngineForm(numberOfInstances,
                         operatingSystemSoftware,
                         provisioningModel,

@@ -3,7 +3,6 @@ package com.epam.webdriver.aleksandrgostev.page.base;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,29 +14,23 @@ public class BasePage {
     private static final Duration TIMEOUT = Duration.ofSeconds(10);
     private static final Duration SLEEP = Duration.ofSeconds(5);
     protected final WebDriver driver;
+    private final WebDriverWait webDriverWait;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
+        webDriverWait = new WebDriverWait(this.driver, TIMEOUT, SLEEP);
         PageFactory.initElements(driver, this);
     }
 
-    public WebDriver getDriver() {
-        return driver;
-    }
-
-    public void waitForVisibility(WebElement webElement) {
-        waitForElement(ExpectedConditions.visibilityOf(webElement));
-    }
-
     public void waitForVisibility(List<WebElement> webElements) {
-        waitForElement(ExpectedConditions.visibilityOfAllElements(webElements));
+        webDriverWait.until(ExpectedConditions.visibilityOfAllElements(webElements));
     }
 
-    public void waitForClick(WebElement webElement) {
-        waitForElement(ExpectedConditions.elementToBeClickable(webElement));
+    public WebElement waitForVisibility(WebElement webElement) {
+        return webDriverWait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
-    private void waitForElement(ExpectedCondition<?> expectedCondition) {
-        new WebDriverWait(driver, TIMEOUT, SLEEP).until(expectedCondition);
+    public void waitAndClick(WebElement webElement) {
+        waitForVisibility(webElement).click();
     }
 }

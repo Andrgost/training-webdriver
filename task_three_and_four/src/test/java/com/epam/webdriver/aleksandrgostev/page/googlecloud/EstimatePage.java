@@ -53,7 +53,7 @@ public class EstimatePage extends BasePage {
     public EmailYourEstimatePage clickEmailEstimateButton() {
         waitForVisibility(emailEstimateButton);
 
-        JSExecutorUtils.clickElementViaJS(driver, emailEstimateButton);
+        JSExecutorUtils.clickElement(driver, emailEstimateButton);
         return new EmailYourEstimatePage(driver);
     }
 }

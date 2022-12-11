@@ -10,10 +10,17 @@ import static java.lang.String.format;
 
 public class GoogleCloudPricingCalculatorPage extends BasePage {
 
-    private static final String DATACENTER_LOCATION_XPATH_PATTERN = "//md-option[contains(@ng-repeat,'computeServer') and @value='%s']/div";
-    private static final String LOCAL_SSD_XPATH_PATTERN = "//md-option[contains(@ng-repeat, 'dynamicSsd')]/div[contains(text(), '%s')]";
-    private static final String NUMBER_OF_GPU_XPATH_PATTERN = "//md-option[contains(@ng-repeat,'gpuType') and @value='%s']";
+    // Frames
+    private static final By COMPUTE_ENGINE_FRAME = By.id("myFrame");
+    private static final By MAIN_FRAME = By.xpath("//*[@id='cloud-site']//iframe");
+
+    // Elements
     private static final String GPU_TYPE_XPATH_PATTERN = "//md-option[@value='%s']";
+    private static final String OS_XPATH_PATTERN = "//md-option[@value='%s']/div[@class='md-text']";
+    private static final String NUMBER_OF_GPU_XPATH_PATTERN = "//md-option[contains(@ng-repeat,'gpuType') and @value='%s']";
+    private static final String PROVISIONING_MODEL_XPATH_PATTERN = "//md-select-menu/md-content/md-option/div[contains(text(), '%s')]";
+    private static final String LOCAL_SSD_XPATH_PATTERN = "//md-option[contains(@ng-repeat, 'dynamicSsd')]/div[contains(text(), '%s')]";
+    private static final String DATACENTER_LOCATION_XPATH_PATTERN = "//md-option[contains(@ng-repeat,'computeServer') and @value='%s']/div";
 
     @FindBy(xpath = "//md-pagination-wrapper/descendant::div[@title='Compute Engine']")
     private WebElement computeEngineTab;
@@ -53,12 +60,8 @@ public class GoogleCloudPricingCalculatorPage extends BasePage {
     }
 
     public GoogleCloudPricingCalculatorPage clickComputeEngineTab() {
-        WebElement mainFrame = driver.findElement(By.xpath("//*[@id='cloud-site']//iframe"));
-        driver.switchTo().frame(mainFrame);
-
-        WebElement computeEngineFrame = driver.findElement(By.id("myFrame"));
-        driver.switchTo().frame(computeEngineFrame);
-
+        driver.switchTo().frame(driver.findElement(MAIN_FRAME));
+        driver.switchTo().frame(driver.findElement(COMPUTE_ENGINE_FRAME));
         computeEngineTab.click();
         return this;
     }
@@ -76,46 +79,34 @@ public class GoogleCloudPricingCalculatorPage extends BasePage {
 
         //Operating System / Software dropdown
         operatingSystemSoftwareSelect.click();
-        WebElement operatingSystemSoftwareOption = driver.findElement(By.xpath(format("//md-option[@value='%s']/div[@class='md-text']", operatingSystemSoftware)));
-        operatingSystemSoftwareOption.click();
+        driver.findElement(By.xpath(format(OS_XPATH_PATTERN, operatingSystemSoftware))).click();
 
         //Provisioning model (VM Class) dropdown
         provisioningModelSelect.click();
-        WebElement provisioningModelOption = driver.findElement(By.xpath(format("//md-select-menu/md-content/md-option/div[contains(text(), '%s')]", provisioningModel)));
-        provisioningModelOption.click();
+        waitAndClick(driver.findElement(By.xpath(format(PROVISIONING_MODEL_XPATH_PATTERN, provisioningModel))));
 
         //Machine type (Instance type) dropdown
         machineTypeSelect.click();
-        WebElement machineTypeOption = driver.findElement(By.xpath(format(GPU_TYPE_XPATH_PATTERN, machineType)));
-        waitForVisibility(machineTypeOption);
-        machineTypeOption.click();
+        waitAndClick(driver.findElement(By.xpath(format(GPU_TYPE_XPATH_PATTERN, machineType))));
 
         //Add GPUs checkbox
-        waitForVisibility(gpuCheckbox);
-        gpuCheckbox.click();
+        waitAndClick(gpuCheckbox);
 
         //GPU type dropdown
         gpuTypeSelect.click();
-        WebElement GPUTypeOption = driver.findElement(By.xpath(format(GPU_TYPE_XPATH_PATTERN, gpuType)));
-        waitForVisibility(GPUTypeOption);
-        GPUTypeOption.click();
+        waitAndClick(driver.findElement(By.xpath(format(GPU_TYPE_XPATH_PATTERN, gpuType))));
 
         //Number of GPUs dropdown
         numberOfGPUSelect.click();
-        WebElement numberOfGPUOption = driver.findElement(By.xpath(format(NUMBER_OF_GPU_XPATH_PATTERN, numberOfGPU)));
-        numberOfGPUOption.click();
+        driver.findElement(By.xpath(format(NUMBER_OF_GPU_XPATH_PATTERN, numberOfGPU))).click();
 
         //Local SSD dropdown
         localSSDSelect.click();
-        WebElement localSsdOption = driver.findElement(By.xpath(format(LOCAL_SSD_XPATH_PATTERN, localSSD)));
-        waitForVisibility(localSsdOption);
-        localSsdOption.click();
+        waitAndClick(driver.findElement(By.xpath(format(LOCAL_SSD_XPATH_PATTERN, localSSD))));
 
         //Datacenter Location dropdown
         datacenterLocationSelect.click();
-        WebElement datacenterLocationOption = driver.findElement(By.xpath(format(DATACENTER_LOCATION_XPATH_PATTERN, datacenterLocation)));
-        waitForVisibility(datacenterLocationOption);
-        datacenterLocationOption.click();
+        waitAndClick(driver.findElement(By.xpath(format(DATACENTER_LOCATION_XPATH_PATTERN, datacenterLocation))));
 
         addToEstimateButton.click();
 

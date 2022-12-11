@@ -5,10 +5,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public final class JSExecutorUtils {
+
     private JSExecutorUtils() {
     }
 
-    public static void clickElementViaJS(WebDriver driver, WebElement webElement) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", webElement);
+    public static void clickElement(WebDriver driver, WebElement webElement) {
+        executeScript(driver, webElement, "arguments[0].click();");
+    }
+
+    public static void scrollIntoView(WebDriver driver, WebElement webElement) {
+        executeScript(driver, webElement, "arguments[0].scrollIntoView();");
+    }
+
+    private static void executeScript(WebDriver driver, WebElement webElement, String action) {
+        ((JavascriptExecutor) driver).executeScript(action, webElement);
     }
 }

@@ -43,8 +43,7 @@ public class TempMailPage extends BasePage {
     }
 
     public LetterPage clickLetter() {
-        waitForClick(letter);
-        letter.click();
+        waitAndClick(letter);
         return new LetterPage(driver);
     }
 }

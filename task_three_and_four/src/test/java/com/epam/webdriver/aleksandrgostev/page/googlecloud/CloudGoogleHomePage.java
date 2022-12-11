@@ -11,7 +11,7 @@ import java.util.List;
 public class CloudGoogleHomePage extends BasePage {
 
     private static final String HOMEPAGE_URL = "https://cloud.google.com/";
-    private static final String SEARCH_TERM = "Google Cloud Platform Pricing Calculator";
+    private static final By GOOGLE_CLOUD_PRICING_CALCULATOR = By.linkText("Google Cloud Pricing Calculator");
 
     @FindBy(name = "q")
     private WebElement searchButton;
@@ -31,21 +31,16 @@ public class CloudGoogleHomePage extends BasePage {
         return this;
     }
 
-    public CloudGoogleHomePage searchForTerm() {
+    public CloudGoogleHomePage searchForTerm(String searchTerm) {
         searchButton.click();
-        searchButton.sendKeys(SEARCH_TERM);
-
-        waitForVisibility(searchResultsButton);
-        searchResultsButton.click();
-
+        searchButton.sendKeys(searchTerm);
+        waitAndClick(searchResultsButton);
         waitForVisibility(searchResults);
-
         return this;
     }
 
     public GoogleCloudPricingCalculatorPage clickSearchResult() {
-        searchResults.get(1).findElement(By.linkText("Google Cloud Pricing Calculator")).click();
-
+        searchResults.get(1).findElement(GOOGLE_CLOUD_PRICING_CALCULATOR).click();
         return new GoogleCloudPricingCalculatorPage(driver);
     }
 }
