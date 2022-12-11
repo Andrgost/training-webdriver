@@ -86,7 +86,7 @@ public class GoogleCloudPricingCalculatorPage extends BasePage {
         waitAndClick(driver.findElement(By.xpath(format(PROVISIONING_MODEL_XPATH_PATTERN, provisioningModel))));
 
         //Machine type (Instance type) dropdown
-        machineTypeSelect.click();
+        waitAndClick(machineTypeSelect);
         waitAndClick(driver.findElement(By.xpath(format(GPU_TYPE_XPATH_PATTERN, machineType))));
 
         //Add GPUs checkbox
@@ -98,7 +98,7 @@ public class GoogleCloudPricingCalculatorPage extends BasePage {
 
         //Number of GPUs dropdown
         numberOfGPUSelect.click();
-        driver.findElement(By.xpath(format(NUMBER_OF_GPU_XPATH_PATTERN, numberOfGPU))).click();
+        waitAndClick(driver.findElement(By.xpath(format(NUMBER_OF_GPU_XPATH_PATTERN, numberOfGPU))));
 
         //Local SSD dropdown
         localSSDSelect.click();
