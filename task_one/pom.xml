@@ -7,13 +7,6 @@
         <groupId>com.epam.webdriver.aleksandrgostev</groupId>
         <version>1.0</version>
     </parent>
-
     <artifactId>task_one</artifactId>
     <modelVersion>4.0.0</modelVersion>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
 </project>
