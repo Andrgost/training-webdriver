@@ -7,6 +7,6 @@
         <groupId>com.epam.webdriver.aleksandrgostev</groupId>
         <version>1.0</version>
     </parent>
-    <artifactId>task_one</artifactId>
+    <artifactId>task_three_and_four</artifactId>
     <modelVersion>4.0.0</modelVersion>
 </project>
