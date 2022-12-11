@@ -1,6 +1,6 @@
-package com.epam.webdriver.aleksandrgostev.page.googlecloud;
+package com.epam.webdriver.aleksandrgostev.pages.googlecloud;
 
-import com.epam.webdriver.aleksandrgostev.page.base.BasePage;
+import com.epam.webdriver.aleksandrgostev.pages.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,8 +11,8 @@ import static java.lang.String.format;
 public class GoogleCloudPricingCalculatorPage extends BasePage {
 
     // Frames
-    private static final By COMPUTE_ENGINE_FRAME = By.id("myFrame");
-    private static final By MAIN_FRAME = By.xpath("//*[@id='cloud-site']//iframe");
+    protected static final By COMPUTE_ENGINE_FRAME = By.id("myFrame");
+    protected static final By MAIN_FRAME = By.xpath("//*[@id='cloud-site']//iframe");
 
     // Elements
     private static final String GPU_TYPE_XPATH_PATTERN = "//md-option[@value='%s']";

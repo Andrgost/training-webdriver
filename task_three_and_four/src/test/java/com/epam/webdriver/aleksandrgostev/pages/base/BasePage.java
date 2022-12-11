@@ -1,4 +1,4 @@
-package com.epam.webdriver.aleksandrgostev.page.base;
+package com.epam.webdriver.aleksandrgostev.pages.base;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

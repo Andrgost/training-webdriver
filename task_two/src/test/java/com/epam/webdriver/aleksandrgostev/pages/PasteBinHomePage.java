@@ -1,4 +1,4 @@
-package com.epam.webdriver.aleksandrgostev.page;
+package com.epam.webdriver.aleksandrgostev.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +12,9 @@ public class PasteBinHomePage {
 
     @FindBy(id = "postform-text")
     private WebElement pasteTextArea;
+
+    @FindBy(id = "select2-postform-format-container")
+    private WebElement pasteSyntaxHighlightingDropdown;
 
     @FindBy(id = "select2-postform-expiration-container")
     private WebElement pasteExpirationDropdown;
@@ -32,16 +35,20 @@ public class PasteBinHomePage {
         return this;
     }
 
-    public CreatedPaste createPaste(String code, String duration, String name) {
+    public CreatedPaste createPaste(String code, String highlighting, String expiration, String name) {
         pasteTextArea.sendKeys(code);
 
+        pasteSyntaxHighlightingDropdown.click();
+        WebElement pasteSyntaxHighlightingOption = driver.findElement(By.xpath(String.format("//li[text()='%s']", highlighting)));
+        pasteSyntaxHighlightingOption.click();
+
         pasteExpirationDropdown.click();
-        WebElement pasteExpirationOption = driver.findElement(By.xpath(String.format("//li[text()='%s']", duration)));
+        WebElement pasteExpirationOption = driver.findElement(By.xpath(String.format("//li[text()='%s']", expiration)));
         pasteExpirationOption.click();
 
         pasteNameTitleInput.sendKeys(name);
         createNewPasteButton.click();
 
-        return new CreatedPaste(driver, name);
+        return new CreatedPaste(driver);
     }
 }

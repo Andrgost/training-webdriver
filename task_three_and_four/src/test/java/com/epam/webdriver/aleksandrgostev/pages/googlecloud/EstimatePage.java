@@ -1,6 +1,6 @@
-package com.epam.webdriver.aleksandrgostev.page.googlecloud;
+package com.epam.webdriver.aleksandrgostev.pages.googlecloud;
 
-import com.epam.webdriver.aleksandrgostev.page.base.BasePage;
+import com.epam.webdriver.aleksandrgostev.pages.base.BasePage;
 import com.epam.webdriver.aleksandrgostev.utilities.JSExecutorUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

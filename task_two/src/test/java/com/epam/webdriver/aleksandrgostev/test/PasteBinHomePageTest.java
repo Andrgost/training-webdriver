@@ -1,7 +1,7 @@
 package com.epam.webdriver.aleksandrgostev.test;
 
-import com.epam.webdriver.aleksandrgostev.page.CreatedPaste;
-import com.epam.webdriver.aleksandrgostev.page.PasteBinHomePage;
+import com.epam.webdriver.aleksandrgostev.pages.CreatedPaste;
+import com.epam.webdriver.aleksandrgostev.pages.PasteBinHomePage;
 import com.epam.webdriver.aleksandrgostev.testdata.ParametersByDataProvider;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;

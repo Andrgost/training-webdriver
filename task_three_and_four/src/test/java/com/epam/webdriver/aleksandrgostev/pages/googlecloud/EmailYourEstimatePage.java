@@ -1,15 +1,13 @@
-package com.epam.webdriver.aleksandrgostev.page.googlecloud;
+package com.epam.webdriver.aleksandrgostev.pages.googlecloud;
 
-import com.epam.webdriver.aleksandrgostev.page.base.BasePage;
-import com.epam.webdriver.aleksandrgostev.page.tempmail.TempMailPage;
-import org.openqa.selenium.By;
+import com.epam.webdriver.aleksandrgostev.pages.tempmail.TempMailPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 
-public class EmailYourEstimatePage extends BasePage {
+public class EmailYourEstimatePage extends GoogleCloudPricingCalculatorPage {
 
     @FindBy(xpath = "//md-input-container/input[@type='email']")
     private WebElement emailInput;
@@ -29,11 +27,9 @@ public class EmailYourEstimatePage extends BasePage {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(0));
 
-        WebElement mainFrame = driver.findElement(By.xpath("//*[@id='cloud-site']//iframe"));
-        driver.switchTo().frame(mainFrame);
+        driver.switchTo().frame(driver.findElement(MAIN_FRAME));
 
-        WebElement computeEngineFrame = driver.findElement(By.id("myFrame"));
-        driver.switchTo().frame(computeEngineFrame);
+        driver.switchTo().frame(driver.findElement(COMPUTE_ENGINE_FRAME));
 
         emailInput.sendKeys(tempEmailAddress);
 
