@@ -6,16 +6,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static java.lang.String.format;
+
 public class GoogleCloudPricingCalculatorPage extends BasePage {
+
+    private static final String DATACENTER_LOCATION_XPATH_PATTERN = "//md-option[contains(@ng-repeat,'computeServer') and @value='%s']/div";
+    private static final String LOCAL_SSD_XPATH_PATTERN = "//md-option[contains(@ng-repeat, 'dynamicSsd')]/div[contains(text(), '%s')]";
+    private static final String NUMBER_OF_GPU_XPATH_PATTERN = "//md-option[contains(@ng-repeat,'gpuType') and @value='%s']";
+    private static final String GPU_TYPE_XPATH_PATTERN = "//md-option[@value='%s']";
 
     @FindBy(xpath = "//md-pagination-wrapper/descendant::div[@title='Compute Engine']")
     private WebElement computeEngineTab;
 
     @FindBy(xpath = "//input[@ng-model='listingCtrl.computeServer.quantity']")
     private WebElement numberOfInstancesInput;
-
-    @FindBy(xpath = "//input[@ng-model='listingCtrl.computeServer.label']")
-    private WebElement whatAreTheseInstancesForInput;
 
     @FindBy(xpath = "//md-select[@ng-model='listingCtrl.computeServer.os']")
     private WebElement operatingSystemSoftwareSelect;
@@ -27,10 +31,10 @@ public class GoogleCloudPricingCalculatorPage extends BasePage {
     private WebElement machineTypeSelect;
 
     @FindBy(xpath = "//*[@ng-model='listingCtrl.computeServer.addGPUs']")
-    private WebElement GPUCheckbox;
+    private WebElement gpuCheckbox;
 
     @FindBy(xpath = "//*[@ng-model='listingCtrl.computeServer.gpuType']")
-    private WebElement GPUTypeSelect;
+    private WebElement gpuTypeSelect;
 
     @FindBy(xpath = "//*[@ng-model='listingCtrl.computeServer.gpuCount']")
     private WebElement numberOfGPUSelect;
@@ -60,11 +64,9 @@ public class GoogleCloudPricingCalculatorPage extends BasePage {
     }
 
     public EstimatePage fillInComputeEngineForm(Integer numberOfInstances,
-                                                String whatAreTheseInstancesFor,
                                                 String operatingSystemSoftware,
                                                 String provisioningModel,
                                                 String machineType,
-                                                Boolean gpu,
                                                 String gpuType,
                                                 String numberOfGPU,
                                                 String localSSD,
@@ -72,53 +74,48 @@ public class GoogleCloudPricingCalculatorPage extends BasePage {
         //Instances input
         numberOfInstancesInput.sendKeys(numberOfInstances.toString());
 
-        //What Are These Instances For input
-        whatAreTheseInstancesForInput.sendKeys(whatAreTheseInstancesFor);
-
         //Operating System / Software dropdown
         operatingSystemSoftwareSelect.click();
-        WebElement operatingSystemSoftwareOption = driver.findElement(By.xpath(String.format("//md-option[@value='%s']/div[@class='md-text']", operatingSystemSoftware)));
+        WebElement operatingSystemSoftwareOption = driver.findElement(By.xpath(format("//md-option[@value='%s']/div[@class='md-text']", operatingSystemSoftware)));
         operatingSystemSoftwareOption.click();
 
         //Provisioning model (VM Class) dropdown
         provisioningModelSelect.click();
-        WebElement provisioningModelOption = driver.findElement(By.xpath(String.format("//md-select-menu/md-content/md-option/div[contains(text(), '%s')]", provisioningModel)));
+        WebElement provisioningModelOption = driver.findElement(By.xpath(format("//md-select-menu/md-content/md-option/div[contains(text(), '%s')]", provisioningModel)));
         provisioningModelOption.click();
 
         //Machine type (Instance type) dropdown
         machineTypeSelect.click();
-        WebElement machineTypeOption = driver.findElement(By.xpath(String.format("//md-option[@value='%s']", machineType)));
+        WebElement machineTypeOption = driver.findElement(By.xpath(format(GPU_TYPE_XPATH_PATTERN, machineType)));
+        waitForVisibility(machineTypeOption);
         machineTypeOption.click();
 
         //Add GPUs checkbox
-        if (gpu) GPUCheckbox.click();
+        waitForVisibility(gpuCheckbox);
+        gpuCheckbox.click();
 
         //GPU type dropdown
-        GPUTypeSelect.click();
-        WebElement GPUTypeOption = driver.findElement(By.xpath(String.format("//md-option[@value='%s']", gpuType)));
+        gpuTypeSelect.click();
+        WebElement GPUTypeOption = driver.findElement(By.xpath(format(GPU_TYPE_XPATH_PATTERN, gpuType)));
+        waitForVisibility(GPUTypeOption);
         GPUTypeOption.click();
 
         //Number of GPUs dropdown
         numberOfGPUSelect.click();
-        WebElement numberOfGPUOption = driver.findElement(By.xpath(String.format("//md-option[contains(@ng-repeat,'gpuType') and @value='%s']", numberOfGPU)));
+        WebElement numberOfGPUOption = driver.findElement(By.xpath(format(NUMBER_OF_GPU_XPATH_PATTERN, numberOfGPU)));
         numberOfGPUOption.click();
 
         //Local SSD dropdown
         localSSDSelect.click();
-        WebElement localSSDOption = driver.findElement(By.xpath(String.format("//md-option[contains(@ng-repeat, 'dynamicSsd')]/div[contains(text(), '%s')]", localSSD)));
-        localSSDOption.click();
+        WebElement localSsdOption = driver.findElement(By.xpath(format(LOCAL_SSD_XPATH_PATTERN, localSSD)));
+        waitForVisibility(localSsdOption);
+        localSsdOption.click();
 
         //Datacenter Location dropdown
         datacenterLocationSelect.click();
-        WebElement datacenterLocationOption = driver.findElement(By.xpath(String.format("//md-option[contains(@ng-repeat,'computeServer') and @value='%s']/div", datacenterLocation)));
+        WebElement datacenterLocationOption = driver.findElement(By.xpath(format(DATACENTER_LOCATION_XPATH_PATTERN, datacenterLocation)));
+        waitForVisibility(datacenterLocationOption);
         datacenterLocationOption.click();
-
-        //Committed usage - depends on Provisioning model = Regular
-        /*
-        committedUsageSelect.click();
-        committedUsageOption = driver.findElement(By.xpath("//md-option[@value='1']"));
-        committedUsageSelect.click();
-        */
 
         addToEstimateButton.click();
 

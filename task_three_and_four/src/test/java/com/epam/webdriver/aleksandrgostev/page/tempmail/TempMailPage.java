@@ -31,16 +31,19 @@ public class TempMailPage extends BasePage {
         return this;
     }
 
-    public String getTempEmailAddress() throws IOException, UnsupportedFlavorException {
+    public String getTempEmailAddress() {
         copyMailAddressButton.click();
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Clipboard clipboard = toolkit.getSystemClipboard();
-        return (String) clipboard.getData(DataFlavor.stringFlavor);
+        try {
+            return (String) clipboard.getData(DataFlavor.stringFlavor);
+        } catch (UnsupportedFlavorException | IOException e) {
+            return null;
+        }
     }
 
     public LetterPage clickLetter() {
         waitForClick(letter);
-
         letter.click();
         return new LetterPage(driver);
     }

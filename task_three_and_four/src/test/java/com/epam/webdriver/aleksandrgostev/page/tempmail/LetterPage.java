@@ -5,9 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class LetterPage extends BasePage {
 
     @FindBy(xpath = "//*[text()='Total Estimated Monthly Cost']/parent::*/following-sibling::*/h3")
@@ -17,14 +14,7 @@ public class LetterPage extends BasePage {
         super(driver);
     }
 
-    public double getTotalEstimatedMonthlyCost() {
-        Pattern pattern = Pattern.compile("\\d[,]\\d+[.]\\d{2}");
-        Matcher matcher = pattern.matcher(costUSD.getText());
-        String stringPrice = "";
-        while (matcher.find()) {
-            stringPrice = matcher.group();
-        }
-        stringPrice = stringPrice.replace(",", "");
-        return Double.parseDouble(stringPrice);
+    public String getTotalEstimatedMonthlyCost() {
+        return costUSD.getText();
     }
 }

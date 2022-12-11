@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class EstimatePage extends BasePage {
 
-    @FindBy(xpath = "//md-list-item/div[contains(text(), 'Spot')]")
+    @FindBy(xpath = "//md-list-item/div[contains(text(), 'Provisioning model')]")
     private WebElement provisioningModel;
 
     @FindBy(xpath = "//md-list-item/div[contains(text(), 'Instance type')]")
@@ -51,7 +51,7 @@ public class EstimatePage extends BasePage {
     }
 
     public EmailYourEstimatePage clickEmailEstimateButton() {
-        waitForClick(emailEstimateButton);
+        waitForVisibility(emailEstimateButton);
 
         JSExecutorUtils.clickElementViaJS(driver, emailEstimateButton);
         return new EmailYourEstimatePage(driver);

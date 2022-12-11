@@ -2,238 +2,64 @@ package com.epam.webdriver.aleksandrgostev.test;
 
 import com.epam.webdriver.aleksandrgostev.driver.DriverManager;
 import com.epam.webdriver.aleksandrgostev.page.googlecloud.CloudGoogleHomePage;
+import com.epam.webdriver.aleksandrgostev.page.googlecloud.EstimatePage;
 import com.epam.webdriver.aleksandrgostev.page.googlecloud.GoogleCloudPricingCalculatorPage;
 import com.epam.webdriver.aleksandrgostev.testdata.ParametersByDataProvider;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import static java.lang.String.format;
 
 public class CloudGoogleHomePageTest {
 
-    private DriverManager driverManager;
+    private static final String ERROR_MESSAGE = "%s is not as expected";
+    private final DriverManager driverManager = new DriverManager();
 
     @BeforeMethod(alwaysRun = true)
     public void browserSetup() {
-        driverManager = new DriverManager();
         driverManager.createWebDriver();
     }
 
-    @Test(description = "Verify Provisioning model (VM Class) field",
-            dataProvider = "PageFieldsValues",
-            dataProviderClass = ParametersByDataProvider.class)
-    public void checkProvisioningModel(Integer numberOfInstances,
-                                       String whatAreTheseInstancesFor,
-                                       String operatingSystemSoftware,
-                                       String provisioningModel,
-                                       String machineType,
-                                       Boolean gpu,
-                                       String gpuType,
-                                       String numberOfGPU,
-                                       String localSSD,
-                                       String datacenterLocation,
-                                       String provisioningModelExpected,
-                                       String machineTypeExpected,
-                                       String localSSDExpected,
-                                       String datacenterLocationExpected,
-                                       Double totalPriceExpected) {
-
-        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driverManager.getDriver())
-                .openPage()
-                .searchForTerm()
-                .clickSearchResult();
-
-        String provisioningModelActual = calculatorPage
-                .clickComputeEngineTab()
-                .fillInComputeEngineForm(numberOfInstances,
-                        whatAreTheseInstancesFor,
-                        operatingSystemSoftware,
-                        provisioningModel,
-                        machineType,
-                        gpu,
-                        gpuType,
-                        numberOfGPU,
-                        localSSD,
-                        datacenterLocation)
-                .getProvisioningModelText();
-
-        Assert.assertTrue(provisioningModelActual.contains(provisioningModelExpected), "Provisioning Model is not equal");
-    }
-
-    @Test(description = "Verify Machine Type field",
-            dataProvider = "PageFieldsValues",
-            dataProviderClass = ParametersByDataProvider.class)
-    public void checkMachineType(Integer numberOfInstances,
-                                 String whatAreTheseInstancesFor,
-                                 String operatingSystemSoftware,
-                                 String provisioningModel,
-                                 String machineType,
-                                 Boolean gpu,
-                                 String gpuType,
-                                 String numberOfGPU,
-                                 String localSSD,
-                                 String datacenterLocation,
-                                 String provisioningModelExpected,
-                                 String machineTypeExpected,
-                                 String localSSDExpected,
-                                 String datacenterLocationExpected,
-                                 Double totalPriceExpected) {
-
-        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driverManager.getDriver())
-                .openPage()
-                .searchForTerm()
-                .clickSearchResult();
-
-        String machineTypeActual = calculatorPage
-                .clickComputeEngineTab()
-                .fillInComputeEngineForm(numberOfInstances,
-                        whatAreTheseInstancesFor,
-                        operatingSystemSoftware,
-                        provisioningModel,
-                        machineType,
-                        gpu,
-                        gpuType,
-                        numberOfGPU,
-                        localSSD,
-                        datacenterLocation)
-                .getMachineTypeText();
-
-        Assert.assertTrue(machineTypeActual.contains(machineTypeExpected), "Machine type is not equal");
-    }
-
     @Test(description = "Verify Datacenter Location field",
-            dataProvider = "PageFieldsValues",
+            dataProvider = "fieldValuesDataProvider",
             dataProviderClass = ParametersByDataProvider.class)
     public void checkDatacenterLocation(Integer numberOfInstances,
-                                        String whatAreTheseInstancesFor,
                                         String operatingSystemSoftware,
                                         String provisioningModel,
                                         String machineType,
-                                        Boolean gpu,
                                         String gpuType,
                                         String numberOfGPU,
                                         String localSSD,
                                         String datacenterLocation,
-                                        String provisioningModelExpected,
-                                        String machineTypeExpected,
-                                        String localSSDExpected,
                                         String datacenterLocationExpected,
-                                        Double totalPriceExpected) {
+                                        String machineTypeExpected,
+                                        String totalPriceExpected) {
 
         GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driverManager.getDriver())
                 .openPage()
                 .searchForTerm()
                 .clickSearchResult();
 
-        String datacenterLocationActual = calculatorPage
+        EstimatePage estimatePage = calculatorPage
                 .clickComputeEngineTab()
                 .fillInComputeEngineForm(numberOfInstances,
-                        whatAreTheseInstancesFor,
                         operatingSystemSoftware,
                         provisioningModel,
                         machineType,
-                        gpu,
                         gpuType,
                         numberOfGPU,
                         localSSD,
-                        datacenterLocation)
-                .getDatacenterLocationText();
+                        datacenterLocation);
 
-        Assert.assertTrue(datacenterLocationActual.contains(datacenterLocationExpected), "Datacenter location is not equal");
-    }
-
-    @Test(description = "Verify Local SSD field",
-            dataProvider = "PageFieldsValues",
-            dataProviderClass = ParametersByDataProvider.class)
-    public void checkLocalSSD(Integer numberOfInstances,
-                              String whatAreTheseInstancesFor,
-                              String operatingSystemSoftware,
-                              String provisioningModel,
-                              String machineType,
-                              Boolean gpu,
-                              String gpuType,
-                              String numberOfGPU,
-                              String localSSD,
-                              String datacenterLocation,
-                              String provisioningModelExpected,
-                              String machineTypeExpected,
-                              String localSSDExpected,
-                              String datacenterLocationExpected,
-                              Double totalPriceExpected) {
-
-        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driverManager.getDriver())
-                .openPage()
-                .searchForTerm()
-                .clickSearchResult();
-
-        String localSSDActual = calculatorPage
-                .clickComputeEngineTab()
-                .fillInComputeEngineForm(numberOfInstances,
-                        whatAreTheseInstancesFor,
-                        operatingSystemSoftware,
-                        provisioningModel,
-                        machineType,
-                        gpu,
-                        gpuType,
-                        numberOfGPU,
-                        localSSD,
-                        datacenterLocation)
-                .getLocalSSDOptionText();
-
-        Assert.assertTrue(localSSDActual.contains(localSSDExpected), "Local SSD is not equal");
-    }
-
-    @Test(description = "Verify Provisioning model (VM Class) field",
-            dataProvider = "PageFieldsValues",
-            dataProviderClass = ParametersByDataProvider.class)
-    public void checkTotalPrice(Integer numberOfInstances,
-                                String whatAreTheseInstancesFor,
-                                String operatingSystemSoftware,
-                                String provisioningModel,
-                                String machineType,
-                                Boolean gpu,
-                                String gpuType,
-                                String numberOfGPU,
-                                String localSSD,
-                                String datacenterLocation,
-                                String provisioningModelExpected,
-                                String machineTypeExpected,
-                                String localSSDExpected,
-                                String datacenterLocationExpected,
-                                Double totalPriceExpected) {
-
-        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driverManager.getDriver())
-                .openPage()
-                .searchForTerm()
-                .clickSearchResult();
-
-        String totalPrice = calculatorPage
-                .clickComputeEngineTab()
-                .fillInComputeEngineForm(numberOfInstances,
-                        whatAreTheseInstancesFor,
-                        operatingSystemSoftware,
-                        provisioningModel,
-                        machineType,
-                        gpu,
-                        gpuType,
-                        numberOfGPU,
-                        localSSD,
-                        datacenterLocation)
-                .getTotalPrice();
-
-        Pattern pattern = Pattern.compile("\\d[,]\\d+[.]\\d{2}");
-        Matcher matcher = pattern.matcher(totalPrice);
-        String stringPrice = "";
-        while (matcher.find()) {
-            stringPrice = matcher.group();
-        }
-        stringPrice = stringPrice.replace(",", "");
-        Double priceActual = Double.parseDouble(stringPrice);
-
-        Assert.assertEquals(priceActual, totalPriceExpected, "Total price is not equal");
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(estimatePage.getDatacenterLocationText().contains(datacenterLocationExpected), format(ERROR_MESSAGE, "Datacenter location"));
+        softAssert.assertTrue(estimatePage.getProvisioningModelText().contains(provisioningModel), format(ERROR_MESSAGE, "Provisioning model"));
+        softAssert.assertTrue(estimatePage.getMachineTypeText().contains(machineTypeExpected), format(ERROR_MESSAGE, "Machine type"));
+        softAssert.assertTrue(estimatePage.getLocalSSDOptionText().contains(localSSD), format(ERROR_MESSAGE, "Local SSD"));
+        softAssert.assertTrue(estimatePage.getTotalPrice().contains(totalPriceExpected), format(ERROR_MESSAGE, "Total price"));
+        softAssert.assertAll();
     }
 
     @AfterMethod(alwaysRun = true)

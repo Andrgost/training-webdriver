@@ -7,8 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class EmailYourEstimatePage extends BasePage {
@@ -23,7 +21,7 @@ public class EmailYourEstimatePage extends BasePage {
         super(driver);
     }
 
-    public TempMailPage sendEmail() throws IOException, UnsupportedFlavorException {
+    public TempMailPage sendEmail() {
         String tempEmailAddress = new TempMailPage(driver)
                 .openTempMailPageInNewTab()
                 .getTempEmailAddress();
