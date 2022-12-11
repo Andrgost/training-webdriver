@@ -29,7 +29,7 @@ public class BasePage {
         waitForElement(ExpectedConditions.visibilityOf(webElement));
     }
 
-    public void waitForVisibilityAll(List<WebElement> webElements) {
+    public void waitForVisibility(List<WebElement> webElements) {
         waitForElement(ExpectedConditions.visibilityOfAllElements(webElements));
     }
 

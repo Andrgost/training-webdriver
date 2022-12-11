@@ -38,7 +38,7 @@ public class CloudGoogleHomePage extends BasePage {
         waitForVisibility(searchResultsButton);
         searchResultsButton.click();
 
-        waitForVisibilityAll(searchResults);
+        waitForVisibility(searchResults);
 
         return this;
     }
