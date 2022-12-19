@@ -6,24 +6,24 @@ import com.epam.webdriver.aleksandrgostev.pages.googlecloud.EmailYourEstimatePag
 import com.epam.webdriver.aleksandrgostev.pages.googlecloud.EstimatePage;
 import com.epam.webdriver.aleksandrgostev.pages.googlecloud.GoogleCloudPricingCalculatorPage;
 import com.epam.webdriver.aleksandrgostev.pages.tempmail.LetterPage;
-import com.epam.webdriver.aleksandrgostev.testdata.ParametersByDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class TempMailPageTest {
 
-    private final DriverManager driverManager = new DriverManager();
-
     @BeforeMethod(alwaysRun = true)
     public void browserSetup() {
-        driverManager.createWebDriver();
+        DriverManager.getDriver();
     }
 
-    @Test(description = "Verify Provisioning model (VM Class) field",
-            dataProvider = "fieldValuesDataProvider",
-            dataProviderClass = ParametersByDataProvider.class)
+    @Test(description = "Verify Provisioning model (VM Class) field")
+    @Parameters({"searchTerm", "numberOfInstances", "operatingSystemSoftware",
+            "provisioningModel", "machineType", "gpuType",
+            "numberOfGPU", "localSSD", "datacenterLocation",
+            "datacenterLocationExpected", "machineTypeExpected", "totalPriceExpected"})
     public void checkPriceInEmail(String searchTerm,
                                   int numberOfInstances,
                                   String operatingSystemSoftware,
@@ -36,7 +36,7 @@ public class TempMailPageTest {
                                   String datacenterLocationExpected,
                                   String machineTypeExpected,
                                   String totalPriceExpected) {
-        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(driverManager.getDriver())
+        GoogleCloudPricingCalculatorPage calculatorPage = new CloudGoogleHomePage(DriverManager.getDriver())
                 .openPage()
                 .searchForTerm(searchTerm)
                 .clickSearchResult();
@@ -61,6 +61,6 @@ public class TempMailPageTest {
 
     @AfterMethod(alwaysRun = true)
     public void browserTearDown() {
-        driverManager.quitWebDriver();
+        DriverManager.quitWebDriver();
     }
 }

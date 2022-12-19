@@ -4,24 +4,30 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
+import java.util.Optional;
 
 public class DriverManager {
 
-    private WebDriver driver;
+    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    public WebDriver getDriver() {
-        return driver;
+    private DriverManager() {
     }
 
-    public void createWebDriver() {
-        driver = new ChromeDriver();
+    public static WebDriver getDriver() {
+        if (driver.get() == null) {
+            driver.set(new ChromeDriver());
 
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+            driver.get().manage().window().maximize();
+            driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        }
+
+        return driver.get();
     }
 
-    public void quitWebDriver() {
-        driver.quit();
-        driver = null;
+    public static void quitWebDriver() {
+        Optional.ofNullable(driver.get()).ifPresent(d -> {
+            driver.get().quit();
+            driver.set(null);
+        });
     }
 }
