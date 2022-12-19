@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
+import java.util.Optional;
 
 public class DriverManager {
 
@@ -24,7 +25,9 @@ public class DriverManager {
     }
 
     public static void quitWebDriver() {
-        driver.get().quit();
-        driver.set(null);
+        Optional.ofNullable(driver.get()).ifPresent(d -> {
+            driver.get().quit();
+            driver.set(null);
+        });
     }
 }
