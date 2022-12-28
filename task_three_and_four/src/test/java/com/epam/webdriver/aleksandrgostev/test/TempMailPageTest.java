@@ -6,12 +6,11 @@ import com.epam.webdriver.aleksandrgostev.pages.googlecloud.EmailYourEstimatePag
 import com.epam.webdriver.aleksandrgostev.pages.googlecloud.EstimatePage;
 import com.epam.webdriver.aleksandrgostev.pages.googlecloud.GoogleCloudPricingCalculatorPage;
 import com.epam.webdriver.aleksandrgostev.pages.tempmail.LetterPage;
+import com.epam.webdriver.aleksandrgostev.utilities.TestListener;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
+@Listeners({TestListener.class})
 public class TempMailPageTest {
 
     @BeforeMethod(alwaysRun = true)

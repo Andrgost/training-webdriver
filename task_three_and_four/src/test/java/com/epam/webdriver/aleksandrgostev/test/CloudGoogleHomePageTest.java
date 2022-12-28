@@ -4,14 +4,13 @@ import com.epam.webdriver.aleksandrgostev.driver.DriverManager;
 import com.epam.webdriver.aleksandrgostev.pages.googlecloud.CloudGoogleHomePage;
 import com.epam.webdriver.aleksandrgostev.pages.googlecloud.EstimatePage;
 import com.epam.webdriver.aleksandrgostev.pages.googlecloud.GoogleCloudPricingCalculatorPage;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import com.epam.webdriver.aleksandrgostev.utilities.TestListener;
+import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
 import static java.lang.String.format;
 
+@Listeners({TestListener.class})
 public class CloudGoogleHomePageTest {
 
     private static final String ERROR_MESSAGE = "%s is not as expected";

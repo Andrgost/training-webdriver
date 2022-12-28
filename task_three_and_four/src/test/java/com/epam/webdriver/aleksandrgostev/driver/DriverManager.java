@@ -1,7 +1,9 @@
 package com.epam.webdriver.aleksandrgostev.driver;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.time.Duration;
 import java.util.Optional;
@@ -14,13 +16,26 @@ public class DriverManager {
     }
 
     public static WebDriver getDriver() {
-        if (driver.get() == null) {
-            driver.set(new ChromeDriver());
-
+        if (null == driver.get()) {
+//            //How to run test with Param=kkk via Intellij IDEA?
+//            System.out.println(System.getProperty("kkk"));
+            switch (System.getProperty("browser")) {
+                case "firefox": {
+                    WebDriverManager.firefoxdriver().setup();
+                    driver.set(new FirefoxDriver());
+                }
+                case "edge": {
+                    WebDriverManager.edgedriver().setup();
+                    driver.set(new FirefoxDriver());
+                }
+                default: {
+                    WebDriverManager.chromedriver().setup();
+                    driver.set(new ChromeDriver());
+                }
+            }
             driver.get().manage().window().maximize();
             driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         }
-
         return driver.get();
     }
 
