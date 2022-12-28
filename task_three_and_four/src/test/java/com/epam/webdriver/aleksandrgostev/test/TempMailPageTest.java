@@ -8,15 +8,12 @@ import com.epam.webdriver.aleksandrgostev.pages.googlecloud.GoogleCloudPricingCa
 import com.epam.webdriver.aleksandrgostev.pages.tempmail.LetterPage;
 import com.epam.webdriver.aleksandrgostev.utilities.TestListener;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
-public class TempMailPageTest {
-
-    @BeforeMethod(alwaysRun = true)
-    public void browserSetup() {
-        DriverManager.getDriver();
-    }
+public class TempMailPageTest extends BaseTest {
 
     @Test(description = "Verify Provisioning model (VM Class) field")
     @Parameters({"searchTerm", "numberOfInstances", "operatingSystemSoftware",
@@ -56,10 +53,5 @@ public class TempMailPageTest {
         LetterPage letterPage = emailYourEstimatePage.sendEmail().clickLetter();
 
         Assert.assertTrue(letterPage.getTotalEstimatedMonthlyCost().contains(totalPriceExpected), "Total price is not equal");
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void browserTearDown() {
-        DriverManager.quitWebDriver();
     }
 }

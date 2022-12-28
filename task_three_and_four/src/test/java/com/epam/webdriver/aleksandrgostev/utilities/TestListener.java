@@ -48,16 +48,18 @@ public class TestListener implements ITestListener {
     }
 
     private void saveScreenshot() {
-        File screenCapture = ((TakesScreenshot) DriverManager
-                .getDriver())
-                .getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(screenCapture, new File(
-                    ".//target/screenshots/"
-                            + getCurrentTimeAsString() +
-                            ".png"));
-        } catch (IOException e) {
-            log.error("Failed to save screenshot: " + e.getLocalizedMessage());
+        if (DriverManager.getDriver() != null) {
+            File screenCapture = ((TakesScreenshot) DriverManager
+                    .getDriver())
+                    .getScreenshotAs(OutputType.FILE);
+            try {
+                FileUtils.copyFile(screenCapture, new File(
+                        ".//target/screenshots/"
+                                + getCurrentTimeAsString() +
+                                ".png"));
+            } catch (IOException e) {
+                log.error("Failed to save screenshot: " + e.getLocalizedMessage());
+            }
         }
     }
 

@@ -11,45 +11,39 @@ import java.util.Optional;
 
 public class DriverManager {
 
-    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private static final ThreadLocal<WebDriver> DRIVER = new ThreadLocal<>();
 
     private DriverManager() {
     }
 
     public static WebDriver getDriver() {
-        createDriver();
-        return driver.get();
+        return DRIVER.get();
     }
 
     public static void quitWebDriver() {
-        Optional.ofNullable(driver.get()).ifPresent(d -> {
-            driver.get().quit();
-            driver.set(null);
+        Optional.ofNullable(DRIVER.get()).ifPresent(d -> {
+            DRIVER.get().quit();
+            DRIVER.set(null);
         });
     }
 
-    private static void createDriver() {
-        if (null == driver.get()) {
-            switch (System.getProperty("browser", "chrome")) {
-                case "firefox": {
-                    WebDriverManager.firefoxdriver().setup();
-                    driver.set(new FirefoxDriver());
-                }
-                case "edge": {
-                    WebDriverManager.edgedriver().setup();
-                    driver.set(new EdgeDriver());
-                }
-                case "chrome": {
-                    WebDriverManager.chromedriver().setup();
-                    driver.set(new ChromeDriver());
-                }
-                default: {
-                    WebDriverManager.chromedriver().setup();
-                    driver.set(new ChromeDriver());
-                }
+    public static void createDriver() {
+        switch (System.getProperty("browser", "chrome")) {
+            case "firefox": {
+                WebDriverManager.firefoxdriver().setup();
+                DRIVER.set(new FirefoxDriver());
             }
-            driver.get().manage().window().maximize();
-            driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+            case "edge": {
+                WebDriverManager.edgedriver().setup();
+                DRIVER.set(new EdgeDriver());
+            }
+            case "chrome":
+            default: {
+                WebDriverManager.chromedriver().setup();
+                DRIVER.set(new ChromeDriver());
+            }
+            DRIVER.get().manage().window().maximize();
+            DRIVER.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         }
     }
 }
