@@ -4,22 +4,18 @@ import com.epam.webdriver.aleksandrgostev.driver.DriverManager;
 import com.epam.webdriver.aleksandrgostev.pages.googlecloud.CloudGoogleHomePage;
 import com.epam.webdriver.aleksandrgostev.pages.googlecloud.EstimatePage;
 import com.epam.webdriver.aleksandrgostev.pages.googlecloud.GoogleCloudPricingCalculatorPage;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import com.epam.webdriver.aleksandrgostev.utilities.TestListener;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import static java.lang.String.format;
 
-public class CloudGoogleHomePageTest {
+@Listeners({TestListener.class})
+public class CloudGoogleHomePageTest extends BaseTest {
 
     private static final String ERROR_MESSAGE = "%s is not as expected";
-
-    @BeforeMethod(alwaysRun = true)
-    public void browserSetup() {
-        DriverManager.getDriver();
-    }
 
     @Test(description = "Verify Datacenter Location field")
     @Parameters({"searchTerm", "numberOfInstances", "operatingSystemSoftware",
@@ -61,10 +57,5 @@ public class CloudGoogleHomePageTest {
         softAssert.assertTrue(estimatePage.getLocalSSDOptionText().contains(localSSD), format(ERROR_MESSAGE, "Local SSD"));
         softAssert.assertTrue(estimatePage.getTotalPrice().contains(totalPriceExpected), format(ERROR_MESSAGE, "Total price"));
         softAssert.assertAll();
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void browserTearDown() {
-        DriverManager.quitWebDriver();
     }
 }
