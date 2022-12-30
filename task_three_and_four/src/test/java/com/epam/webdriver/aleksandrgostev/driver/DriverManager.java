@@ -37,10 +37,7 @@ public class DriverManager {
                 WebDriverManager.edgedriver().setup();
                 DRIVER.set(new EdgeDriver());
             }
-            case "chrome": {
-                WebDriverManager.chromedriver().setup();
-                DRIVER.set(new ChromeDriver());
-            }
+            case "chrome":
             default: {
                 WebDriverManager.chromedriver().setup();
                 DRIVER.set(new ChromeDriver());
