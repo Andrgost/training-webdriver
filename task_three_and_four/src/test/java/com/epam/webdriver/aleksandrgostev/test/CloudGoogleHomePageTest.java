@@ -1,10 +1,10 @@
 package com.epam.webdriver.aleksandrgostev.test;
 
+import com.epam.reportportal.testng.ReportPortalTestNGListener;
 import com.epam.webdriver.aleksandrgostev.driver.DriverManager;
 import com.epam.webdriver.aleksandrgostev.pages.googlecloud.CloudGoogleHomePage;
 import com.epam.webdriver.aleksandrgostev.pages.googlecloud.EstimatePage;
 import com.epam.webdriver.aleksandrgostev.pages.googlecloud.GoogleCloudPricingCalculatorPage;
-import com.epam.webdriver.aleksandrgostev.utilities.TestListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -12,7 +12,7 @@ import org.testng.asserts.SoftAssert;
 
 import static java.lang.String.format;
 
-@Listeners({TestListener.class})
+@Listeners(ReportPortalTestNGListener.class)
 public class CloudGoogleHomePageTest extends BaseTest {
 
     private static final String ERROR_MESSAGE = "%s is not as expected";

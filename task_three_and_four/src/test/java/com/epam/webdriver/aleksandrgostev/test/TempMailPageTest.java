@@ -1,18 +1,18 @@
 package com.epam.webdriver.aleksandrgostev.test;
 
+import com.epam.reportportal.testng.ReportPortalTestNGListener;
 import com.epam.webdriver.aleksandrgostev.driver.DriverManager;
 import com.epam.webdriver.aleksandrgostev.pages.googlecloud.CloudGoogleHomePage;
 import com.epam.webdriver.aleksandrgostev.pages.googlecloud.EmailYourEstimatePage;
 import com.epam.webdriver.aleksandrgostev.pages.googlecloud.EstimatePage;
 import com.epam.webdriver.aleksandrgostev.pages.googlecloud.GoogleCloudPricingCalculatorPage;
 import com.epam.webdriver.aleksandrgostev.pages.tempmail.LetterPage;
-import com.epam.webdriver.aleksandrgostev.utilities.TestListener;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-@Listeners({TestListener.class})
+@Listeners(ReportPortalTestNGListener.class)
 public class TempMailPageTest extends BaseTest {
 
     @Test(description = "Verify Provisioning model (VM Class) field")
